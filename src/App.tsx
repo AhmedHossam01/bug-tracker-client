@@ -14,11 +14,13 @@ const App = () => {
   return (
     <div
       className={isDark ? "dark" : ""}
+      data-theme={isDark ? "dark" : "light"}
       onKeyDown={handleKeyPress}
       tabIndex={0}
     >
       <div className="text-3xl dark:bg-slate-900 min-h-screen dark:text-slate-100">
         hello world
+        <button className="btn btn-primary">Click Me</button>
       </div>
     </div>
   );
