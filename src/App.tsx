@@ -25,7 +25,7 @@ const App = () => {
     >
       <Appbar toggleSidebar={toggleSidebar} />
 
-      <div className="bg-slate-100 dark:bg-slate-900 dark:text-slate-100 overflow-hidden flex">
+      <div className="bg-slate-200 dark:bg-slate-900 dark:text-slate-100 overflow-hidden flex">
         <Sidebar isSidebarOpen={isSidebarOpen} />
         <div className="w-full overflow-y-auto p-8">
           <div className="">test</div>

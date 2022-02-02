@@ -12,7 +12,7 @@ import SidebarHeading from "./SidebarHeading";
 const Sidebar = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
   return (
     <div
-      className={`transition-all flex bg-white h-full flex-shrink-0 overflow-y-auto dark:bg-slate-800 ${
+      className={`transition-[width] flex bg-slate-100 h-full flex-shrink-0 overflow-y-auto dark:bg-slate-800 ${
         isSidebarOpen ? "w-0 p-0 md:p-4 md:w-64" : "md:w-0 md:p-0 w-full p-4"
       }`}
     >
@@ -39,7 +39,9 @@ const Sidebar = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
 
         <SiedebarItem
           name="New Project"
-          icon={<PlusCircleIcon className="w-6 h-6 text-green-400" />}
+          icon={
+            <PlusCircleIcon className="w-6 h-6 text-green-600 dark:text-green-400" />
+          }
         />
 
         <div className="mt-auto"></div>
