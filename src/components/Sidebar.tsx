@@ -9,9 +9,13 @@ import {
 } from "@heroicons/react/outline";
 import SidebarHeading from "./SidebarHeading";
 
-const Sidebar = () => {
+const Sidebar = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
   return (
-    <div className="flex w-64 p-4 bg-white h-screen flex-shrink-0 overflow-y-auto dark:bg-slate-800">
+    <div
+      className={`transition-all flex bg-white h-full flex-shrink-0 overflow-y-auto dark:bg-slate-800 ${
+        isSidebarOpen ? "w-0 p-0 md:p-4 md:w-64" : "md:w-0 md:p-0 w-full p-4"
+      }`}
+    >
       <ul className="flex flex-col w-full">
         <SiedebarItem
           active
