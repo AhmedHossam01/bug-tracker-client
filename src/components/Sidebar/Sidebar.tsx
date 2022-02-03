@@ -12,6 +12,7 @@ import SidebarHeading from "./SidebarHeading";
 const Sidebar = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
   return (
     <div
+      data-testid="sidebar"
       className={`transition-[width,padding] whitespace-nowrap flex bg-slate-100 h-full flex-shrink-0 overflow-y-auto dark:bg-slate-800 ${
         isSidebarOpen ? "w-0 p-0 md:p-4 md:w-64" : "md:w-0 md:p-0 w-full p-4"
       }`}
