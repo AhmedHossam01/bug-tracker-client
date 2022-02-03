@@ -10,11 +10,11 @@ const Appbar = ({
   return (
     <div className="px-6 py-4 bg-white dark:bg-slate-700 dark:text-slate-100 flex justify-between">
       <button onClick={toggleSidebar}>
-        <div className="w-4 h-3 flex flex-col justify-between">
-          <div className="w-full h-[1.8px] bg-slate-100 rounded-full"></div>
-          <div className="w-full h-[1.8px] bg-slate-100 rounded-full"></div>
+        <div className="w-7 h-6 flex flex-col justify-around">
+          <div className="w-full h-[4px] bg-slate-600 dark:bg-slate-300 rounded-md"></div>
+          <div className="w-full h-[4px] bg-slate-600 dark:bg-slate-300 rounded-md"></div>
           <div
-            className={`h-[1.8px] bg-slate-100 rounded-full transition-[width] ${
+            className={`h-[4px] bg-slate-600 dark:bg-slate-300 rounded-md transition-[width] ${
               isSidebarOpen ? "w-1/2 md:w-full" : "md:w-1/2 w-full"
             }`}
           ></div>
