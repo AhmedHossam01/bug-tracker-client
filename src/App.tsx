@@ -23,7 +23,7 @@ const App = () => {
       onKeyDown={handleKeyPress}
       tabIndex={0}
     >
-      <Appbar toggleSidebar={toggleSidebar} />
+      <Appbar toggleSidebar={toggleSidebar} isSidebarOpen={isSidebarOpen} />
 
       <div className="bg-slate-200 dark:bg-slate-900 dark:text-slate-100 overflow-hidden flex">
         <Sidebar isSidebarOpen={isSidebarOpen} />
