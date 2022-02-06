@@ -27,7 +27,7 @@ const Layout: FC = ({ children }) => {
 
       <div className="bg-slate-200 dark:bg-slate-900 dark:text-slate-100 overflow-hidden flex">
         <Sidebar isSidebarOpen={isSidebarOpen} />
-        <main className="w-full overflow-y-auto">{children}</main>
+        <main className="w-full overflow-y-auto min-h-screen">{children}</main>
       </div>
     </div>
   );
