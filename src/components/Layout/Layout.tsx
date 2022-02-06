@@ -1,5 +1,5 @@
 import { DetailedHTMLProps, HTMLAttributes, useState, FC } from "react";
-import Appbar from "../Appbar";
+import Appbar from "../Appbar/Appbar";
 import Sidebar from "../Sidebar/Sidebar";
 
 const Layout: FC = ({ children }) => {
