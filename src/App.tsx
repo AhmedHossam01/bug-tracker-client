@@ -1,45 +1,35 @@
 import { ArchiveIcon, ClockIcon } from "@heroicons/react/outline";
 import Layout from "./components/Layout/Layout";
+import DashboardProjectCard from "./components/DashboardProjectCard";
+import DashboardTicketCard from "./components/DashboardTicketCard";
+import DashboardTitle from "./components/DashboardTitle";
 
 const App = () => {
   return (
     <Layout>
       <div className="customContainer">
-        <div className="flex justify-between flex-col lg:flex-row">
+        <div className="flex justify-between flex-col lg:flex-row gap-8">
           <div className="lg:w-7/12">
-            <div className="flex gap-x-2 items-center">
-              <ArchiveIcon className="w-6 h-6" />
-              <h2 className="text-xl uppercase font-semibold">My projects</h2>
-            </div>
+            <DashboardTitle title="My projects" icon={<ArchiveIcon />} />
 
-            <div className="mt-4 grid grid-cols-2 gap-4">
-              <div className="bg-indigo-500 text-white p-2 rounded-md  min-h-28 text-5xl">
-                My bug tracker
-                <div className="text-gray-300 text-sm mt-3 flex items-center gap-x-1">
-                  <ClockIcon className="w-4 h-4" />
-                  Last updated: an hour ago
-                </div>
-              </div>
+            <div className="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-2">
+              <DashboardProjectCard />
+              <DashboardProjectCard />
+              <DashboardProjectCard />
+              <DashboardProjectCard />
             </div>
           </div>
 
           <div className="lg:w-5/12">
-            <div className="flex gap-x-2 items-center">
-              <ClockIcon className="w-6 h-6" />
-              <h2 className="text-xl uppercase font-semibold">
-                Recent tickets
-              </h2>
-            </div>
-            <div className="mt-4">
-              <div className="bg-slate-700 py-3 px-4 rounded-md text-white">
-                <div className="flex justify-between">
-                  <p>This's my first ticket</p>
-                  <p>1 day ago</p>
-                </div>
-                <div className="bg-indigo-500 rounded md p-1 text-white w-fit mt-2">
-                  My bug tracker
-                </div>
-              </div>
+            <DashboardTitle title="Recent tickets" icon={<ClockIcon />} />
+
+            <div className="mt-4 flex flex-col gap-4">
+              <DashboardTicketCard />
+              <DashboardTicketCard />
+              <DashboardTicketCard />
+              <DashboardTicketCard />
+              <DashboardTicketCard />
+              <DashboardTicketCard />
             </div>
           </div>
         </div>
