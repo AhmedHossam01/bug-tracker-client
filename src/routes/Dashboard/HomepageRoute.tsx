@@ -1,7 +1,7 @@
 import { ArchiveIcon, ClockIcon } from "@heroicons/react/outline";
-import DashboardProjectCard from "../../components/DashboardProjectCard";
-import DashboardTicketCard from "../../components/DashboardTicketCard";
-import DashboardTitle from "../../components/DashboardTitle";
+import DashboardProjectCard from "../../components/Dashboard/ProjectCard";
+import DashboardTicketCard from "../../components/Dashboard/TicketCard";
+import DashboardTitle from "../../components/Dashboard/ItemsTitle";
 
 const HomepageRoute = () => {
   return (
