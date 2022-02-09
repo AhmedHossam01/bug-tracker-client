@@ -1,8 +1,9 @@
-import { DetailedHTMLProps, HTMLAttributes, useState, FC } from "react";
+import { DetailedHTMLProps, HTMLAttributes, useState } from "react";
+import { Outlet } from "react-router-dom";
 import Appbar from "../Appbar/Appbar";
 import Sidebar from "../Sidebar/Sidebar";
 
-const Layout: FC = ({ children }) => {
+const Layout = () => {
   const [isDark, setIsDark] = useState(true);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
@@ -27,7 +28,9 @@ const Layout: FC = ({ children }) => {
 
       <div className="bg-slate-200 dark:bg-slate-900 dark:text-slate-100 overflow-hidden flex">
         <Sidebar isSidebarOpen={isSidebarOpen} />
-        <main className="w-full overflow-y-auto min-h-screen">{children}</main>
+        <main className="w-full overflow-y-auto min-h-screen">
+          <Outlet />
+        </main>
       </div>
     </div>
   );
