@@ -1,5 +1,21 @@
+import { FormEvent } from "react";
+import { Navigate } from "react-router-dom";
+import { login } from "../store/authSlice";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+
 const LoginRoute = () => {
-  return (
+  const user = useAppSelector((state) => state.auth.user);
+  const dispatch = useAppDispatch();
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    dispatch(login());
+  };
+
+  return user ? (
+    <Navigate to="/dashboard" replace />
+  ) : (
     <section>
       <div className="flex min-h-screen overflow-hidden">
         <div className="flex flex-col justify-center flex-1 px-4 py-12 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
@@ -14,7 +30,7 @@ const LoginRoute = () => {
             </div>
             <div className="mt-8">
               <div className="mt-6">
-                <form action="#" method="POST" className="space-y-6">
+                <form className="space-y-6" onSubmit={handleSubmit}>
                   <div>
                     <label
                       htmlFor="email"
@@ -79,10 +95,7 @@ const LoginRoute = () => {
                     </div>
                   </div>
                   <div>
-                    <button
-                      type="submit"
-                      className="flex items-center justify-center w-full px-10 py-4 text-base font-medium text-center text-white transition duration-500 ease-in-out transform bg-blue-600 rounded-xl hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                    >
+                    <button className="flex items-center justify-center w-full px-10 py-4 text-base font-medium text-center text-white transition duration-500 ease-in-out transform bg-blue-600 rounded-xl hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                       Sign in
                     </button>
                   </div>
@@ -98,10 +111,7 @@ const LoginRoute = () => {
                   </div>
                 </div>
                 <div>
-                  <button
-                    type="submit"
-                    className="w-full items-center block px-10 py-3.5 text-base font-medium text-center text-blue-600 transition duration-500 ease-in-out transform border-2 border-white shadow-md rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
-                  >
+                  <button className="w-full items-center block px-10 py-3.5 text-base font-medium text-center text-blue-600 transition duration-500 ease-in-out transform border-2 border-white shadow-md rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
                     <div className="flex items-center justify-center">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"

@@ -8,8 +8,12 @@ import {
   TicketIcon,
 } from "@heroicons/react/outline";
 import SidebarHeading from "./SidebarHeading";
+import { useAppDispatch } from "../../store/hooks";
+import { logout } from "../../store/authSlice";
 
 const Sidebar = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
+  const dispatch = useAppDispatch();
+
   return (
     <div
       data-testid="sidebar"
@@ -53,6 +57,7 @@ const Sidebar = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
         <SiedebarItem
           name="Logout (Ahmed)"
           icon={<LogoutIcon className="w-6 h-6 text-red-500" />}
+          onClick={() => dispatch(logout())}
         />
       </ul>
     </div>
