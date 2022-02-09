@@ -9,7 +9,7 @@ import {
 import LoginRoute from "./routes/LoginRoute";
 import HomepageRoute from "./routes/Dashboard/HomepageRoute";
 import NotFound from "./routes/Dashboard/NotFound";
-import RequireAuth from "./components/Dashboard/RequireAuth";
+import RequireAuth from "./components/Common/RequireAuth";
 
 const App = () => {
   return (
