@@ -10,7 +10,10 @@ const LoginRoute = () => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    dispatch(login());
+    dispatch(login({ identifier: "bla bla", password: "bla bla" }))
+      .unwrap()
+      // TODO: show error instead of alert
+      .catch((errValue) => alert(errValue));
   };
 
   return user ? (
@@ -44,7 +47,6 @@ const LoginRoute = () => {
                         name="email"
                         type="email"
                         autoComplete="email"
-                        required
                         placeholder="Your Email"
                         className="block w-full px-5 py-3 text-base placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg text-neutral-600 bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300"
                       />
@@ -63,7 +65,6 @@ const LoginRoute = () => {
                         name="password"
                         type="password"
                         autoComplete="current-password"
-                        required
                         placeholder="Your Password"
                         className="block w-full px-5 py-3 text-base placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg text-neutral-600 bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300"
                       />
@@ -149,7 +150,7 @@ const LoginRoute = () => {
                           d="M48 48L17 24l-4-3 35-10z"
                         />
                       </svg>
-                      <span className="ml-4"> Log in with Google</span>
+                      <span className="ml-4">Log in with Google</span>
                     </div>
                   </button>
                 </div>
