@@ -2,7 +2,7 @@ import axios from "axios";
 
 const token = localStorage.getItem("token");
 
-const API = axios.create({
+const Api = axios.create({
   baseURL: "http://localhost:1337/api",
   responseType: "json",
   headers: {
@@ -11,4 +11,4 @@ const API = axios.create({
   },
 });
 
-export default API;
+export default Api;

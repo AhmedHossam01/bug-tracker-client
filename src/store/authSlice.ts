@@ -1,75 +1,36 @@
-import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-import API from "../services/API";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import UserInterface from "../types/UserInterface";
 
 interface AuthState {
-  user: null | UserData;
-  isLoading: Boolean;
-  error: null | string;
+  isLoading: boolean;
+  error: string;
+  user: UserInterface | null;
 }
 
 const initialState: AuthState = {
-  user: null,
   isLoading: false,
-  error: null,
+  error: "",
+  user: null,
 };
-
-interface UserData {
-  jwt: string;
-  user: {
-    id: string;
-  };
-}
-
-export const login = createAsyncThunk<
-  UserData,
-  { identifier: string; password: string },
-  {
-    rejectValue: string;
-  }
->("auth/login", async (args, { rejectWithValue }) => {
-  try {
-    const { data } = await API.post("/auth/local", args);
-
-    return data;
-  } catch (error) {
-    if (axios.isAxiosError(error)) {
-      return rejectWithValue(error?.response?.data?.error?.message);
-    } else {
-      return rejectWithValue("An unknown error occurred.");
-    }
-  }
-});
 
 export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    logout: (state) => {
-      state.user = null;
-    },
-  },
-  extraReducers: (builder) => {
-    builder.addCase(login.pending, (state) => {
+    updateStart: (state) => {
       state.isLoading = true;
-      state.error = "";
-    });
-
-    builder.addCase(login.rejected, (state, action) => {
+    },
+    updateSuccess: (state, action: PayloadAction<UserInterface>) => {
       state.isLoading = false;
-      state.error = action.payload || "An unknown error occurred.";
-    });
-
-    builder.addCase(
-      login.fulfilled,
-      (state: AuthState, action: PayloadAction<UserData>) => {
-        console.log(action.payload);
-        state.isLoading = false;
-        state.user = action.payload;
-      }
-    );
+      state.user = action.payload;
+    },
+    updateFailure: (state, action: PayloadAction<string>) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
   },
 });
 
-export const { logout } = authSlice.actions;
+export const { updateStart, updateSuccess, updateFailure } = authSlice.actions;
+
 export default authSlice.reducer;

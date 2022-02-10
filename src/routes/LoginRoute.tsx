@@ -1,19 +1,18 @@
 import { FormEvent } from "react";
+import { useDispatch } from "react-redux";
 import { Navigate } from "react-router-dom";
-import { login } from "../store/authSlice";
-import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { loginRequest } from "../services/authRequests";
+import { useAppSelector } from "../store/hooks";
 
 const LoginRoute = () => {
-  const user = useAppSelector((state) => state.auth.user);
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
+
+  const { isLoading, error, user } = useAppSelector((state) => state.auth);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    dispatch(login({ identifier: "bla bla", password: "bla bla" }))
-      .unwrap()
-      // TODO: show error instead of alert
-      .catch((errValue) => alert(errValue));
+    loginRequest({ identifier: "ahmedhossam01", password: "123456" }, dispatch);
   };
 
   return user ? (
