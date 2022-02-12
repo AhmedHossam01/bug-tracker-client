@@ -9,8 +9,16 @@ import {
   TicketIcon,
 } from "@heroicons/react/outline";
 import SidebarHeading from "./SidebarHeading";
+import { useAppSelector } from "../../store/hooks";
 
 const Sidebar = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
+  const user = useAppSelector((state) => state.auth.user);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    window.location.reload();
+  };
+
   return (
     <div
       data-testid="sidebar"
@@ -52,9 +60,9 @@ const Sidebar = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
 
         <SidebarLink name="Settings" icon={<CogIcon className="w-6 h-6" />} />
         <SidebarAction
-          name="Logout (Ahmed)"
+          name={`Logout (${user?.username.substring(0, 8)}...)`}
           icon={<LogoutIcon className="w-6 h-6 text-red-500" />}
-          onClick={() => console.log("Logging out.")}
+          onClick={handleLogout}
         />
       </ul>
     </div>

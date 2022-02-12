@@ -2,7 +2,7 @@ import { ReactElement } from "react";
 
 const SiedebarItem = ({ active, name, icon, badge, onClick }: IProps) => {
   return (
-    <li className="my-px" onClick={onClick}>
+    <li className="my-px cursor-pointer" onClick={onClick}>
       <div
         className={`flex flex-row items-center h-12 px-4 rounded-lg text-gray-600 dark:text-gray-200 ${
           active
