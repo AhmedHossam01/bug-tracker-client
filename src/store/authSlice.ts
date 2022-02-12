@@ -19,6 +19,7 @@ export const authSlice = createSlice({
   reducers: {
     updateStart: (state) => {
       state.isLoading = true;
+      state.error = "";
     },
     updateSuccess: (state, action: PayloadAction<UserInterface>) => {
       state.isLoading = false;

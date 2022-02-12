@@ -1,18 +1,28 @@
-import { FormEvent } from "react";
 import { useDispatch } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { loginRequest } from "../services/authRequests";
 import { useAppSelector } from "../store/hooks";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { ExclamationCircleIcon } from "@heroicons/react/outline";
+import Spinner from "../components/Common/Spinner";
 
 const LoginRoute = () => {
   const dispatch = useDispatch();
 
   const { isLoading, error, user } = useAppSelector((state) => state.auth);
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  interface Inputs {
+    identifier: string;
+    password: string;
+  }
 
-    loginRequest({ identifier: "ahmedhossam01", password: "123456" }, dispatch);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Inputs>();
+  const onSubmit: SubmitHandler<Inputs> = ({ identifier, password }) => {
+    loginRequest({ identifier, password }, dispatch);
   };
 
   return user ? (
@@ -30,24 +40,38 @@ const LoginRoute = () => {
                 Sign in.
               </h2>
             </div>
+
+            {error && (
+              <div className="alert alert-error mt-8">
+                <div className="flex-1">
+                  <ExclamationCircleIcon className="w-6 h-6 mr-2" />
+                  <label>{error}</label>
+                </div>
+              </div>
+            )}
+
             <div className="mt-8">
               <div className="mt-6">
-                <form className="space-y-6" onSubmit={handleSubmit}>
+                <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
                   <div>
                     <label
                       htmlFor="email"
                       className="block text-sm font-medium text-neutral-600"
                     >
-                      Email address
+                      Email or Username
                     </label>
                     <div className="mt-1">
                       <input
-                        id="email"
-                        name="email"
-                        type="email"
+                        {...register("identifier", { required: true })}
+                        id="identifier"
+                        name="identifier"
+                        type="text"
                         autoComplete="email"
-                        placeholder="Your Email"
-                        className="block w-full px-5 py-3 text-base placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg text-neutral-600 bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300"
+                        placeholder="Your Email address or Username"
+                        className={`${
+                          errors.identifier &&
+                          "border-red-500 border-1 focus:border-red-500 focus:ring-red-500 border-1 placeholder:text-red-300 animate-pulse"
+                        } block w-full px-5 py-3 text-base placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg text-neutral-600 bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300`}
                       />
                     </div>
                   </div>
@@ -60,12 +84,16 @@ const LoginRoute = () => {
                     </label>
                     <div className="mt-1">
                       <input
+                        {...register("password", { required: true })}
                         id="password"
                         name="password"
                         type="password"
                         autoComplete="current-password"
                         placeholder="Your Password"
-                        className="block w-full px-5 py-3 text-base placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg text-neutral-600 bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300"
+                        className={`${
+                          errors.password &&
+                          "border-red-500 border-1 focus:border-red-500 focus:ring-red-500 border-1 placeholder:text-red-300 animate-pulse"
+                        } block w-full px-5 py-3 text-base placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg text-neutral-600 bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300`}
                       />
                     </div>
                   </div>
@@ -75,7 +103,6 @@ const LoginRoute = () => {
                         id="remember-me"
                         name="remember-me"
                         type="checkbox"
-                        placeholder="Your password"
                         className="w-4 h-4 text-blue-600 border-gray-200 rounded focus:ring-blue-50"
                       />
                       <label
@@ -95,8 +122,11 @@ const LoginRoute = () => {
                     </div>
                   </div>
                   <div>
-                    <button className="flex items-center justify-center w-full px-10 py-4 text-base font-medium text-center text-white transition duration-500 ease-in-out transform bg-blue-600 rounded-xl hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                      Sign in
+                    <button
+                      disabled={isLoading}
+                      className="disabled:bg-gray-300 flex items-center justify-center w-full px-10 py-4 text-base font-medium text-center text-white transition duration-500 ease-in-out transform bg-blue-600 rounded-xl hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                    >
+                      {isLoading ? <Spinner /> : "Sign in"}
                     </button>
                   </div>
                 </form>
@@ -105,51 +135,13 @@ const LoginRoute = () => {
                     <div className="w-full border-t border-gray-300" />
                   </div>
                   <div className="relative flex justify-center text-sm">
-                    <span className="px-2 bg-white text-neutral-600">
-                      Or continue with
-                    </span>
+                    <span className="px-2 bg-white text-neutral-600">Or</span>
                   </div>
                 </div>
                 <div>
-                  <button className="w-full items-center block px-10 py-3.5 text-base font-medium text-center text-blue-600 transition duration-500 ease-in-out transform border-2 border-white shadow-md rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                  <button className="w-full items-center block px-10 py-3.5 text-base font-medium text-center text-blue-600 transition duration-500 ease-in-out transform border-2 border-white shadow-xl rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
                     <div className="flex items-center justify-center">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        xmlnsXlink="http://www.w3.org/1999/xlink"
-                        className="w-6 h-6"
-                        viewBox="0 0 48 48"
-                      >
-                        <defs>
-                          <path
-                            id="a"
-                            d="M44.5 20H24v8.5h11.8C34.7 33.9 30.1 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z"
-                          />
-                        </defs>
-                        <clipPath id="b">
-                          <use xlinkHref="#a" overflow="visible" />
-                        </clipPath>
-                        <path
-                          clipPath="url(#b)"
-                          fill="#FBBC05"
-                          d="M0 37V11l17 13z"
-                        />
-                        <path
-                          clipPath="url(#b)"
-                          fill="#EA4335"
-                          d="M0 11l17 13 7-6.1L48 14V0H0z"
-                        />
-                        <path
-                          clipPath="url(#b)"
-                          fill="#34A853"
-                          d="M0 37l30-23 7.9 1L48 0v48H0z"
-                        />
-                        <path
-                          clipPath="url(#b)"
-                          fill="#4285F4"
-                          d="M48 48L17 24l-4-3 35-10z"
-                        />
-                      </svg>
-                      <span className="ml-4">Log in with Google</span>
+                      Create an account
                     </div>
                   </button>
                 </div>
