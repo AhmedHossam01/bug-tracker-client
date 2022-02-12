@@ -5,8 +5,19 @@ import HomepageRoute from "./routes/Dashboard/HomepageRoute";
 import NotFound from "./routes/Dashboard/NotFound";
 import RequireAuth from "./components/Common/RequireAuth";
 import LandingRoute from "./routes/LandingRoute";
+import { useEffect } from "react";
+import { findMeRequest } from "./services/authRequests";
+import { useAppDispatch } from "./store/hooks";
 
 const App = () => {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      findMeRequest(dispatch);
+    }
+  }, [dispatch]);
+
   return (
     <BrowserRouter>
       <Routes>
