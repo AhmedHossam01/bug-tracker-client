@@ -1,4 +1,5 @@
-import SiedebarItem from "./SiedebarItem";
+import SidebarAction from "./SiedebarAction";
+import SidebarLink from "./SidebarLink";
 import {
   ArchiveIcon,
   CogIcon,
@@ -18,13 +19,13 @@ const Sidebar = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
       }`}
     >
       <ul className="flex flex-col w-full">
-        <SiedebarItem
+        <SidebarLink
           active
           name="Dashboard"
           icon={<HomeIcon className="w-6 h-6" />}
         />
 
-        <SiedebarItem
+        <SidebarLink
           name="My Tickets"
           badge="16"
           icon={<TicketIcon className="w-6 h-6" />}
@@ -32,13 +33,13 @@ const Sidebar = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
 
         <SidebarHeading title="My Projects" />
 
-        <SiedebarItem
+        <SidebarLink
           name="All Projects"
           badge="2"
           icon={<ArchiveIcon className="w-6 h-6" />}
         />
 
-        <SiedebarItem
+        <SidebarAction
           name="New Project"
           icon={
             <PlusCircleIcon className="w-6 h-6 text-green-600 dark:text-green-400" />
@@ -49,8 +50,8 @@ const Sidebar = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
 
         <SidebarHeading title="Account" />
 
-        <SiedebarItem name="Settings" icon={<CogIcon className="w-6 h-6" />} />
-        <SiedebarItem
+        <SidebarLink name="Settings" icon={<CogIcon className="w-6 h-6" />} />
+        <SidebarAction
           name="Logout (Ahmed)"
           icon={<LogoutIcon className="w-6 h-6 text-red-500" />}
           onClick={() => console.log("Logging out.")}
