@@ -1,5 +1,5 @@
-import { render, screen, fireEvent } from "../../utils/test-utils";
-import Layout from "./Layout";
+import { render, screen, fireEvent } from "../utils/test-utils";
+import Layout from "../components/Layout/Layout";
 
 describe("Layout (Appbar + Sidebar) component", () => {
   test("User should be able to close the sidebar when it's initially open", () => {
