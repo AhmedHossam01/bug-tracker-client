@@ -62,7 +62,7 @@ const Sidebar = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
 
         <SidebarLink name="Settings" icon={<CogIcon className="w-6 h-6" />} />
         <SidebarAction
-          name={`Logout (${user?.username.substring(0, 8)}...)`}
+          name={`Logout (${user?.email.substring(0, 8)}...)`}
           icon={<LogoutIcon className="w-6 h-6 text-red-500" />}
           onClick={handleLogout}
         />

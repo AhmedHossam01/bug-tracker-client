@@ -17,11 +17,8 @@ const LoginRoute = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<LoginFormInterface>();
-  const onSubmit: SubmitHandler<LoginFormInterface> = ({
-    identifier,
-    password,
-  }) => {
-    loginRequest({ identifier, password }, dispatch);
+  const onSubmit: SubmitHandler<LoginFormInterface> = ({ email, password }) => {
+    loginRequest({ email, password }, dispatch);
   };
 
   return user ? (
@@ -56,21 +53,21 @@ const LoginRoute = () => {
                     <label
                       htmlFor="email"
                       className={`block text-sm font-medium text-neutral-600 ${
-                        errors.identifier && "text-red-600"
+                        errors.email && "text-red-600"
                       }`}
                     >
                       Email or Username
                     </label>
                     <div className="mt-1">
                       <input
-                        {...register("identifier", { required: true })}
-                        id="identifier"
-                        name="identifier"
-                        type="text"
+                        {...register("email", { required: true })}
+                        id="email"
+                        name="email"
+                        type="email"
                         autoComplete="email"
                         placeholder="Your Email address or Username"
                         className={`${
-                          errors.identifier &&
+                          errors.email &&
                           "border-red-500 border-1 focus:border-red-500 focus:ring-red-500 border-1 placeholder:text-red-300 animate-pulse"
                         } block w-full px-5 py-3 text-base placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg text-neutral-600 bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300`}
                       />
