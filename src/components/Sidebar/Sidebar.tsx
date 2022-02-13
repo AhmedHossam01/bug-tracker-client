@@ -15,8 +15,10 @@ const Sidebar = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
   const user = useAppSelector((state) => state.auth.user);
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    window.location.reload();
+    if (window.confirm("Are you sure you want to logout?")) {
+      localStorage.removeItem("token");
+      window.location.reload();
+    }
   };
 
   return (

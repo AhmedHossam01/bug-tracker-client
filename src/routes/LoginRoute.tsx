@@ -5,23 +5,22 @@ import { useAppSelector } from "../store/hooks";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { ExclamationCircleIcon } from "@heroicons/react/outline";
 import Spinner from "../components/Common/Spinner";
+import LoginFormInterface from "../types/LoginFormInterface";
 
 const LoginRoute = () => {
   const dispatch = useDispatch();
 
   const { isLoading, error, user } = useAppSelector((state) => state.auth);
 
-  interface Inputs {
-    identifier: string;
-    password: string;
-  }
-
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = ({ identifier, password }) => {
+  } = useForm<LoginFormInterface>();
+  const onSubmit: SubmitHandler<LoginFormInterface> = ({
+    identifier,
+    password,
+  }) => {
     loginRequest({ identifier, password }, dispatch);
   };
 
@@ -56,7 +55,9 @@ const LoginRoute = () => {
                   <div>
                     <label
                       htmlFor="email"
-                      className="block text-sm font-medium text-neutral-600"
+                      className={`block text-sm font-medium text-neutral-600 ${
+                        errors.identifier && "text-red-600"
+                      }`}
                     >
                       Email or Username
                     </label>
@@ -78,7 +79,9 @@ const LoginRoute = () => {
                   <div className="space-y-1">
                     <label
                       htmlFor="password"
-                      className="block text-sm font-medium text-neutral-600"
+                      className={`block text-sm font-medium text-neutral-600 ${
+                        errors.password && "text-red-600"
+                      }`}
                     >
                       Password
                     </label>
