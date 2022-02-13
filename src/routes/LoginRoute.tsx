@@ -56,7 +56,7 @@ const LoginRoute = () => {
                         errors.email && "text-red-600"
                       }`}
                     >
-                      Email or Username
+                      Email
                     </label>
                     <div className="mt-1">
                       <input
