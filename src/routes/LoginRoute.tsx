@@ -38,7 +38,7 @@ const LoginRoute = () => {
             </div>
 
             {error && (
-              <div className="alert alert-error mt-8">
+              <div className="alert alert-error mt-8" role="alert">
                 <div className="flex-1">
                   <ExclamationCircleIcon className="w-6 h-6 mr-2" />
                   <label>{error}</label>
