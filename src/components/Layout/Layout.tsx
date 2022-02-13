@@ -1,9 +1,13 @@
-import { DetailedHTMLProps, HTMLAttributes, useState } from "react";
+import { DetailedHTMLProps, HTMLAttributes, useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
+import { fetchAllProjects } from "../../services/contentRequests";
+import { useAppDispatch } from "../../store/hooks";
 import Appbar from "../Appbar/Appbar";
 import Sidebar from "../Sidebar/Sidebar";
 
 const Layout = () => {
+  const dispatch = useAppDispatch();
+
   const [isDark, setIsDark] = useState(true);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
@@ -16,6 +20,10 @@ const Layout = () => {
   };
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
+
+  useEffect(() => {
+    fetchAllProjects(dispatch);
+  }, [dispatch]);
 
   return (
     <div

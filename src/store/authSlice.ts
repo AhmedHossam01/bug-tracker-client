@@ -34,4 +34,4 @@ export const authSlice = createSlice({
 
 export const { updateStart, updateSuccess, updateFailure } = authSlice.actions;
 
-export default authSlice.reducer;
+export default authSlice;
