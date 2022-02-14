@@ -5,8 +5,8 @@ import DashboardTitle from "../../components/Dashboard/ItemsTitle";
 import { useAppSelector } from "../../store/hooks";
 
 const HomepageRoute = () => {
-  const projects = useAppSelector((state) => state.projects.projects);
-  const tickets = useAppSelector((state) => state.tickets.tickets);
+  const projectsState = useAppSelector((state) => state.projects);
+  const ticketsState = useAppSelector((state) => state.tickets);
 
   return (
     <div className="customContainer mb-12">
@@ -15,7 +15,13 @@ const HomepageRoute = () => {
           <DashboardTitle title="My projects" icon={<ArchiveIcon />} />
 
           <div className="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-2">
-            {projects?.map((project) => (
+            {projectsState.isLoading && (
+              <div className="animate-pulse text-xl bg-white rounded-md flex items-center justify-center text-slate-600">
+                Fetching...
+              </div>
+            )}
+
+            {projectsState?.projects?.map((project) => (
               <DashboardProjectCard key={project.id} project={project} />
             ))}
           </div>
@@ -25,7 +31,13 @@ const HomepageRoute = () => {
           <DashboardTitle title="Recent tickets" icon={<ClockIcon />} />
 
           <div className="mt-4 flex flex-col gap-4">
-            {tickets?.map((ticket) => (
+            {ticketsState.isLoading && (
+              <div className="animate-pulse text-xl bg-white rounded-md flex items-center justify-center text-slate-600">
+                Fetching...
+              </div>
+            )}
+
+            {ticketsState?.tickets?.map((ticket) => (
               <DashboardTicketCard ticket={ticket} />
             ))}
           </div>
