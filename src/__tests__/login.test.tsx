@@ -51,7 +51,7 @@ describe("login form", () => {
       target: { value: "123456" },
     });
 
-    fireEvent.submit(screen.getByRole("button", { name: /sign in/i }));
+    await fireEvent.submit(screen.getByRole("button", { name: /sign in/i }));
 
     expect(
       await screen.findByText(/Incorrect email or password/i)

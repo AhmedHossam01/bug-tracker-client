@@ -4,7 +4,7 @@ import ProjectInterface from "../types/ProjectInterface";
 interface ProjectState {
   isLoading: boolean;
   error: string;
-  projects: ProjectInterface | null;
+  projects: ProjectInterface[] | null;
 }
 
 const initialState: ProjectState = {
@@ -21,7 +21,7 @@ export const projectsSlice = createSlice({
       state.isLoading = true;
       state.error = "";
     },
-    updateSuccess: (state, action: PayloadAction<ProjectInterface>) => {
+    updateSuccess: (state, action: PayloadAction<ProjectInterface[]>) => {
       state.isLoading = false;
       state.projects = action.payload;
     },

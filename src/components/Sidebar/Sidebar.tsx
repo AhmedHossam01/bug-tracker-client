@@ -10,9 +10,11 @@ import {
 } from "@heroicons/react/outline";
 import SidebarHeading from "./SidebarHeading";
 import { useAppSelector } from "../../store/hooks";
+import SubLink from "./SubLink";
 
 const Sidebar = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
   const user = useAppSelector((state) => state.auth.user);
+  const projects = useAppSelector((state) => state.projects.projects);
 
   const handleLogout = () => {
     if (window.confirm("Are you sure you want to logout?")) {
@@ -24,8 +26,8 @@ const Sidebar = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
   return (
     <div
       data-testid="sidebar"
-      className={`transition-[width,padding] whitespace-nowrap flex bg-slate-100 h-full flex-shrink-0 overflow-y-auto dark:bg-slate-800 ${
-        isSidebarOpen ? "w-0 p-0 md:p-4 md:w-64" : "md:w-0 md:p-0 w-full p-4"
+      className={`transition-[width,padding] whitespace-nowrap flex bg-slate-100 h-full flex-shrink-0 overflow-x-hidden overflow-y-auto dark:bg-slate-800 ${
+        isSidebarOpen ? "w-0 p-0 md:p-4 md:w-72" : "md:w-0 md:p-0 w-full p-4"
       }`}
     >
       <ul className="flex flex-col w-full">
@@ -45,9 +47,13 @@ const Sidebar = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
 
         <SidebarLink
           name="All Projects"
-          badge="2"
+          badge={projects?.length.toString()}
           icon={<ArchiveIcon className="w-6 h-6" />}
         />
+
+        {projects?.map((project) => (
+          <SubLink key={project.id} project={project} />
+        ))}
 
         <SidebarAction
           name="New Project"

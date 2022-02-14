@@ -19,7 +19,6 @@ export const loginRequest = async (
     dispatch(updateSuccess(user));
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      console.log(error.response);
       dispatch(
         updateFailure(error.response?.data.message || "An unkown error occured")
       );

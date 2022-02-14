@@ -2,8 +2,11 @@ import { ArchiveIcon, ClockIcon } from "@heroicons/react/outline";
 import DashboardProjectCard from "../../components/Dashboard/ProjectCard";
 import DashboardTicketCard from "../../components/Dashboard/TicketCard";
 import DashboardTitle from "../../components/Dashboard/ItemsTitle";
+import { useAppSelector } from "../../store/hooks";
 
 const HomepageRoute = () => {
+  const projects = useAppSelector((state) => state.projects.projects);
+
   return (
     <div className="customContainer mb-12">
       <div className="flex justify-between flex-col lg:flex-row gap-8">
@@ -11,10 +14,9 @@ const HomepageRoute = () => {
           <DashboardTitle title="My projects" icon={<ArchiveIcon />} />
 
           <div className="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-2">
-            <DashboardProjectCard />
-            <DashboardProjectCard />
-            <DashboardProjectCard />
-            <DashboardProjectCard />
+            {projects?.map((project) => (
+              <DashboardProjectCard key={project.id} project={project} />
+            ))}
           </div>
         </div>
 
