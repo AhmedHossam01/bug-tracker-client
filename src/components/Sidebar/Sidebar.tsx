@@ -15,6 +15,7 @@ import SubLink from "./SubLink";
 const Sidebar = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
   const user = useAppSelector((state) => state.auth.user);
   const projects = useAppSelector((state) => state.projects.projects);
+  const tickets = useAppSelector((state) => state.tickets.tickets);
 
   const handleLogout = () => {
     if (window.confirm("Are you sure you want to logout?")) {
@@ -39,7 +40,7 @@ const Sidebar = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
 
         <SidebarLink
           name="My Tickets"
-          badge="16"
+          badge={tickets?.length.toString()}
           icon={<TicketIcon className="w-6 h-6" />}
         />
 

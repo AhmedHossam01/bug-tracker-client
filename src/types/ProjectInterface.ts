@@ -1,3 +1,5 @@
+import TicketInterface from "./TicketInterface";
+
 export default interface ProjectInterface {
   id: number;
   name: string;
@@ -5,4 +7,5 @@ export default interface ProjectInterface {
   color: string;
   updated_at: string;
   created_at: string;
+  tickets?: TicketInterface[];
 }

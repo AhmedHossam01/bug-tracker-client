@@ -1,6 +1,7 @@
 import { DetailedHTMLProps, HTMLAttributes, useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
-import { fetchAllProjects } from "../../services/contentRequests";
+import { fetchAllProjects } from "../../services/projectRequests";
+import { fetchAllTickets } from "../../services/ticketRequests";
 import { useAppDispatch } from "../../store/hooks";
 import Appbar from "../Appbar/Appbar";
 import Sidebar from "../Sidebar/Sidebar";
@@ -23,6 +24,7 @@ const Layout = () => {
 
   useEffect(() => {
     fetchAllProjects(dispatch);
+    fetchAllTickets(dispatch);
   }, [dispatch]);
 
   return (

@@ -6,6 +6,7 @@ import { useAppSelector } from "../../store/hooks";
 
 const HomepageRoute = () => {
   const projects = useAppSelector((state) => state.projects.projects);
+  const tickets = useAppSelector((state) => state.tickets.tickets);
 
   return (
     <div className="customContainer mb-12">
@@ -24,14 +25,9 @@ const HomepageRoute = () => {
           <DashboardTitle title="Recent tickets" icon={<ClockIcon />} />
 
           <div className="mt-4 flex flex-col gap-4">
-            <DashboardTicketCard />
-            <DashboardTicketCard />
-            <DashboardTicketCard />
-            <DashboardTicketCard />
-            <DashboardTicketCard />
-            <DashboardTicketCard />
-            <DashboardTicketCard />
-            <DashboardTicketCard />
+            {tickets?.map((ticket) => (
+              <DashboardTicketCard ticket={ticket} />
+            ))}
           </div>
         </div>
       </div>
