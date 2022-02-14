@@ -51,9 +51,11 @@ const Sidebar = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
           icon={<ArchiveIcon className="w-6 h-6" />}
         />
 
-        {projects?.map((project) => (
-          <SubLink key={project.id} project={project} />
-        ))}
+        <div>
+          {projects?.map((project) => (
+            <SubLink key={project.id} project={project} />
+          ))}
+        </div>
 
         <SidebarAction
           name="New Project"

@@ -5,12 +5,15 @@ import { setupServer } from "msw/node";
 
 describe("login form", () => {
   const server = setupServer(
-    rest.post("http://localhost:8000/auth/login", (req, res, ctx) => {
-      return res(
-        ctx.status(401),
-        ctx.json({ message: "Incorrect email or password" })
-      );
-    })
+    rest.post(
+      `${process.env.REACT_APP_API_URL}/auth/login`,
+      (req, res, ctx) => {
+        return res(
+          ctx.status(401),
+          ctx.json({ message: "Incorrect email or password" })
+        );
+      }
+    )
   );
 
   beforeAll(() => server.listen());
