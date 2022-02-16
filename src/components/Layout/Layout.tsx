@@ -10,7 +10,6 @@ const Layout = () => {
   const dispatch = useAppDispatch();
 
   const [isDark, setIsDark] = useState(true);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   const handleKeyPress = (
     event: DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>
@@ -19,8 +18,6 @@ const Layout = () => {
       setIsDark(!isDark);
     }
   };
-
-  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
   useEffect(() => {
     fetchAllProjects(dispatch);
@@ -34,10 +31,10 @@ const Layout = () => {
       onKeyDown={handleKeyPress}
       tabIndex={0}
     >
-      <Appbar toggleSidebar={toggleSidebar} isSidebarOpen={isSidebarOpen} />
+      <Appbar />
 
       <div className="bg-slate-200 dark:bg-slate-900 dark:text-slate-100 overflow-hidden flex">
-        <Sidebar isSidebarOpen={isSidebarOpen} />
+        <Sidebar />
         <main className="w-full overflow-y-auto min-h-screen">
           <Outlet />
         </main>

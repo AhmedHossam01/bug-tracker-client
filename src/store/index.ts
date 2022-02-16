@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import authSlice from "./authSlice";
+import layoutSlice from "./layoutSlice";
 import projectsSlice from "./projectsSlice";
 import ticketsSlice from "./ticketsSlice";
 
@@ -8,6 +9,7 @@ const store = configureStore({
     auth: authSlice.reducer,
     projects: projectsSlice.reducer,
     tickets: ticketsSlice.reducer,
+    layout: layoutSlice.reducer,
   },
 });
 

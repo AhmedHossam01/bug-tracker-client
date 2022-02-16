@@ -1,10 +1,15 @@
 import { ReactElement } from "react";
 import { NavLink } from "react-router-dom";
+import { useAppDispatch } from "../../store/hooks";
+import { closeFromLink } from "../../store/layoutSlice";
 
 const SiedebarItem = ({ name, icon, badge, to, key }: IProps) => {
+  const dispatch = useAppDispatch();
+
   return (
     <li className="my-px">
       <NavLink
+        onClick={() => dispatch(closeFromLink())}
         to={to}
         end
         key={key}

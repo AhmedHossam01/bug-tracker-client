@@ -12,10 +12,11 @@ import SidebarHeading from "./SidebarHeading";
 import { useAppSelector } from "../../store/hooks";
 import SubLink from "./SubLink";
 
-const Sidebar = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
+const Sidebar = () => {
   const user = useAppSelector((state) => state.auth.user);
   const projects = useAppSelector((state) => state.projects.projects);
   const tickets = useAppSelector((state) => state.tickets.tickets);
+  const isSidebarOpen = useAppSelector((state) => state.layout.isSidebarOpen);
 
   const handleLogout = () => {
     if (window.confirm("Are you sure you want to logout?")) {

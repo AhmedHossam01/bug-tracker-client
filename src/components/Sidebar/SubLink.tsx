@@ -1,4 +1,6 @@
 import { NavLink } from "react-router-dom";
+import { useAppDispatch } from "../../store/hooks";
+import { closeFromLink } from "../../store/layoutSlice";
 import ProjectInterface from "../../types/ProjectInterface";
 
 const SubLink = ({
@@ -10,9 +12,12 @@ const SubLink = ({
   to: string;
   key: string;
 }) => {
+  const dispatch = useAppDispatch();
+
   return (
     <li className="my-px">
       <NavLink
+        onClick={() => dispatch(closeFromLink())}
         to={to}
         key={key}
         className={({ isActive }) =>
