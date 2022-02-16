@@ -16,10 +16,15 @@ export const fetchAllProjects = async (dispatch: AppDispatch) => {
     dispatch(updateSuccess(res.data));
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      console.log(error.response);
       dispatch(
         updateFailure(error.response?.data.message || "An unkown error occured")
       );
     }
   }
+};
+
+export const fetchSingleProject = async (id: string) => {
+  const res = await Api.get(`/projects/${id}?_embed=tickets`);
+
+  return res.data;
 };

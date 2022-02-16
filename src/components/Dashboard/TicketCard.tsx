@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import TicketInterface from "../../types/TicketInterface";
 import calcTimeAgo from "../../utils/calcTimeAgo";
 
@@ -12,12 +13,14 @@ const DashboardTicketCard = ({
         <p>{name}</p>
         <p>{calcTimeAgo(created_at)}</p>
       </div>
-      <div
-        className="rounded md p-1 text-white w-fit mt-2"
-        style={{ backgroundColor: project?.color }}
-      >
-        {project?.name}
-      </div>
+      <Link to={`/dashboard/projects/${project?.id}`}>
+        <div
+          className="rounded md p-1 text-white w-fit mt-2"
+          style={{ backgroundColor: project?.color }}
+        >
+          {project?.name}
+        </div>
+      </Link>
     </div>
   );
 };

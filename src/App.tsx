@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import { findMeRequest } from "./services/authRequests";
 import { useAppDispatch } from "./store/hooks";
 import AllProjects from "./routes/Dashboard/AllProjects";
+import Project from "./routes/Dashboard/Project";
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -33,6 +34,7 @@ const App = () => {
         >
           <Route index element={<Homepage />} />
           <Route path="projects" element={<AllProjects />} />
+          <Route path="projects/:id" element={<Project />} />
           <Route path="*" element={<NotFound />} />
         </Route>
 

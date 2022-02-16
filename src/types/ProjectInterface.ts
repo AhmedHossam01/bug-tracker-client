@@ -1,7 +1,7 @@
 import TicketInterface from "./TicketInterface";
 
 export default interface ProjectInterface {
-  id: number;
+  id: string;
   name: string;
   description: string;
   color: string;

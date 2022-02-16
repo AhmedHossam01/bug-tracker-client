@@ -16,7 +16,6 @@ export const fetchAllTickets = async (dispatch: AppDispatch) => {
     dispatch(updateSuccess(res.data));
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      console.log(error.response);
       dispatch(
         updateFailure(error.response?.data.message || "An unkown error occured")
       );

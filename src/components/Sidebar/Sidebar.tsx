@@ -59,7 +59,11 @@ const Sidebar = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
 
         <div>
           {projects?.map((project) => (
-            <SubLink key={project.id} project={project} />
+            <SubLink
+              key={project.id.toString()}
+              project={project}
+              to={`projects/${project.id}`}
+            />
           ))}
         </div>
 
