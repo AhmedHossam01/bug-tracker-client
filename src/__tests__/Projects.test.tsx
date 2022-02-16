@@ -25,6 +25,29 @@ const server = setupServer(
         },
       ])
     );
+  }),
+  rest.get(`${process.env.REACT_APP_API_URL}/tickets`, (req, res, ctx) => {
+    return res(
+      ctx.json([
+        {
+          id: 1,
+          name: "Ticket 1",
+          description: "Ticket 1 description",
+          projectId: 1,
+          status: "todo",
+          tags: ["MVP", "UI"],
+          created_at: "2020-03-14T00:00:00.000Z",
+          project: {
+            id: 1,
+            name: "Inventory Management System",
+            description: "A simple inventory management system",
+            color: "#6366F1",
+            updated_at: "2020-03-14T00:00:00.000Z",
+            created_at: "2018-03-14T00:00:00.000Z",
+          },
+        },
+      ])
+    );
   })
 );
 
