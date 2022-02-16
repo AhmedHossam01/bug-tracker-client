@@ -1,13 +1,13 @@
 import Layout from "./components/Layout/Layout";
-import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginRoute from "./routes/LoginRoute";
 import HomepageRoute from "./routes/Dashboard/HomepageRoute";
 import NotFound from "./routes/Dashboard/NotFound";
 import RequireAuth from "./components/Common/RequireAuth";
-import LandingRoute from "./routes/LandingRoute";
 import { useEffect } from "react";
 import { findMeRequest } from "./services/authRequests";
 import { useAppDispatch } from "./store/hooks";
+import AllProjects from "./routes/Dashboard/AllProjects";
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -21,20 +21,25 @@ const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Outlet />}>
-          <Route index element={<LandingRoute />} />
-          <Route path="/login" element={<LoginRoute />} />
-        </Route>
+        <Route path="/" element={<LoginRoute />} />
 
-        <Route
-          path="/dashboard"
-          element={
-            <RequireAuth>
-              <Layout />
-            </RequireAuth>
-          }
-        >
-          <Route index element={<HomepageRoute />} />
+        <Route path="/dashboard" element={<Layout />}>
+          <Route
+            index
+            element={
+              <RequireAuth>
+                <HomepageRoute />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="projects"
+            element={
+              <RequireAuth>
+                <AllProjects />
+              </RequireAuth>
+            }
+          />
           <Route path="*" element={<NotFound />} />
         </Route>
 

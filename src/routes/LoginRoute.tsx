@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import { loginRequest } from "../services/authRequests";
 import { useAppSelector } from "../store/hooks";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -8,6 +8,9 @@ import Spinner from "../components/Common/Spinner";
 import LoginFormInterface from "../types/LoginFormInterface";
 
 const LoginRoute = () => {
+  const location = useLocation();
+  // @ts-ignore
+  const from = location.state?.from?.pathname || "/dashboard";
   const dispatch = useDispatch();
 
   const { isLoading, error, user } = useAppSelector((state) => state.auth);
@@ -22,7 +25,7 @@ const LoginRoute = () => {
   };
 
   return user ? (
-    <Navigate to="/dashboard" replace />
+    <Navigate to={from} replace />
   ) : (
     <section>
       <div className="flex min-h-screen overflow-hidden">
