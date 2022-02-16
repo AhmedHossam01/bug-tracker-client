@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from "../utils/test-utils";
-import LoginRoute from "../routes/LoginRoute";
+import LoginRoute from "../routes/Login";
 import { rest } from "msw";
 import { setupServer } from "msw/node";
 

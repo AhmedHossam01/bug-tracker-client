@@ -4,7 +4,7 @@ import DashboardTicketCard from "../../components/Dashboard/TicketCard";
 import DashboardTitle from "../../components/Dashboard/ItemsTitle";
 import { useAppSelector } from "../../store/hooks";
 
-const HomepageRoute = () => {
+const Homepage = () => {
   const projectsState = useAppSelector((state) => state.projects);
   const ticketsState = useAppSelector((state) => state.tickets);
 
@@ -47,4 +47,4 @@ const HomepageRoute = () => {
   );
 };
 
-export default HomepageRoute;
+export default Homepage;

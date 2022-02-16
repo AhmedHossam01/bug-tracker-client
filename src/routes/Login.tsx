@@ -7,7 +7,7 @@ import { ExclamationCircleIcon } from "@heroicons/react/outline";
 import Spinner from "../components/Common/Spinner";
 import LoginFormInterface from "../types/LoginFormInterface";
 
-const LoginRoute = () => {
+const Login = () => {
   const location = useLocation();
   // @ts-ignore
   const from = location.state?.from?.pathname || "/dashboard";
@@ -164,4 +164,4 @@ const LoginRoute = () => {
   );
 };
 
-export default LoginRoute;
+export default Login;

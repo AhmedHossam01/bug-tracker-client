@@ -1,7 +1,7 @@
 import Layout from "./components/Layout/Layout";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import LoginRoute from "./routes/LoginRoute";
-import HomepageRoute from "./routes/Dashboard/HomepageRoute";
+import Login from "./routes/Login";
+import Homepage from "./routes/Dashboard/Homepage";
 import NotFound from "./routes/Dashboard/NotFound";
 import RequireAuth from "./components/Common/RequireAuth";
 import { useEffect } from "react";
@@ -21,25 +21,18 @@ const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<LoginRoute />} />
+        <Route path="/" element={<Login />} />
 
-        <Route path="/dashboard" element={<Layout />}>
-          <Route
-            index
-            element={
-              <RequireAuth>
-                <HomepageRoute />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path="projects"
-            element={
-              <RequireAuth>
-                <AllProjects />
-              </RequireAuth>
-            }
-          />
+        <Route
+          path="/dashboard"
+          element={
+            <RequireAuth>
+              <Layout />
+            </RequireAuth>
+          }
+        >
+          <Route index element={<Homepage />} />
+          <Route path="projects" element={<AllProjects />} />
           <Route path="*" element={<NotFound />} />
         </Route>
 
