@@ -33,12 +33,15 @@ const Sidebar = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
     >
       <ul className="flex flex-col w-full">
         <SidebarLink
-          active
+          to="/dashboard"
+          key="dashboard"
           name="Dashboard"
           icon={<HomeIcon className="w-6 h-6" />}
         />
 
         <SidebarLink
+          to="tickets"
+          key="tickets"
           name="My Tickets"
           badge={tickets?.length.toString()}
           icon={<TicketIcon className="w-6 h-6" />}
@@ -48,6 +51,8 @@ const Sidebar = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
 
         <SidebarLink
           name="All Projects"
+          to="projects"
+          key="projects"
           badge={projects?.length.toString()}
           icon={<ArchiveIcon className="w-6 h-6" />}
         />
@@ -69,12 +74,18 @@ const Sidebar = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
 
         <SidebarHeading title="Account" />
 
-        <SidebarLink name="Settings" icon={<CogIcon className="w-6 h-6" />} />
+        <SidebarLink
+          to="settings"
+          key="settings"
+          name="Settings"
+          icon={<CogIcon className="w-6 h-6" />}
+        />
         <SidebarAction
           name={`Logout (${user?.email.substring(0, 8)}...)`}
           icon={<LogoutIcon className="w-6 h-6 text-red-500" />}
           onClick={handleLogout}
         />
+        <li className="py-2"></li>
       </ul>
     </div>
   );
