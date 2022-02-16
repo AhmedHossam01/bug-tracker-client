@@ -1,5 +1,8 @@
+import { ArchiveIcon } from "@heroicons/react/outline";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import DashboardTitle from "../../components/Dashboard/ItemsTitle";
+import Kanbaan from "../../components/Kanbaan/Kanbaan";
 import { fetchSingleProject } from "../../services/projectRequests";
 import ProjectInterface from "../../types/ProjectInterface";
 
@@ -15,7 +18,22 @@ const Project = () => {
     console.log(project);
   }, [id, project]);
 
-  return <div className="customContainer">{project && project.name}</div>;
+  return (
+    <div className="customContainer">
+      {project && (
+        <>
+          <DashboardTitle
+            title={project.name}
+            icon={<ArchiveIcon style={{ color: project.color }} />}
+          />
+
+          <div className="mt-8">
+            <Kanbaan project={project} />
+          </div>
+        </>
+      )}
+    </div>
+  );
 };
 
 export default Project;

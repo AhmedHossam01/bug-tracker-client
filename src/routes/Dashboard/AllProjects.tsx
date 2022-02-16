@@ -24,11 +24,6 @@ const AllProjects = () => {
             <DashboardProjectCard project={project} />
           </div>
         ))}
-        {projects?.map((project) => (
-          <div key={project.id} className="mt-4">
-            <DashboardProjectCard project={project} />
-          </div>
-        ))}
       </div>
     </div>
   );
