@@ -5,6 +5,7 @@ import {
   updateStart,
   updateSuccess,
 } from "../store/projectsSlice";
+import ProjectInterface from "../types/ProjectInterface";
 import Api from "./Api";
 
 export const fetchAllProjects = async (dispatch: AppDispatch) => {

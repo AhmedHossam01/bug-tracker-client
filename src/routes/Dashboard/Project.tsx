@@ -14,9 +14,7 @@ const Project = () => {
     if (id) {
       fetchSingleProject(id).then((project) => setProject(project));
     }
-
-    console.log(project);
-  }, [id, project]);
+  }, [id]);
 
   return (
     <div className="customContainer">
@@ -28,7 +26,7 @@ const Project = () => {
           />
 
           <div className="mt-8">
-            <Kanbaan project={project} />
+            <Kanbaan project={project} setProject={setProject} />
           </div>
         </>
       )}
