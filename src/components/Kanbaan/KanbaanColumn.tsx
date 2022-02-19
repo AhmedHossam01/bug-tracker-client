@@ -1,11 +1,31 @@
 import { PlusIcon } from "@heroicons/react/outline";
 import { FC } from "react";
+import { useAppDispatch } from "../../store/hooks";
+import { updateNewTicket } from "../../store/projectsSlice";
 
 const KanbaanColumn: FC<{
   title: string;
   length: number;
   isDraggingOver: boolean;
-}> = ({ title, length, children, isDraggingOver }) => {
+  status: string;
+}> = ({ title, length, children, isDraggingOver, status }) => {
+  const dispatch = useAppDispatch();
+
+  const addNewTicket = () => {
+    dispatch(
+      updateNewTicket({
+        id: "54345",
+        project_id: "1",
+        tags: [],
+        description: "trtrt",
+        created_at: "1212",
+        name: "test",
+        // @ts-ignore
+        status,
+      })
+    );
+  };
+
   return (
     <div
       className={
@@ -21,7 +41,10 @@ const KanbaanColumn: FC<{
             {length}
           </span>
         </div>
-        <div className="text-green-700 hover:bg-green-700 hover:text-white w-5 h-5 rounded-md flex items-center justify-center cursor-pointer transition-colors">
+        <div
+          className="text-green-700 hover:bg-green-700 hover:text-white w-5 h-5 rounded-md flex items-center justify-center cursor-pointer transition-colors"
+          onClick={addNewTicket}
+        >
           <PlusIcon />
         </div>
       </div>

@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import ProjectInterface from "../types/ProjectInterface";
+import TicketInterface from "../types/TicketInterface";
 
 interface ProjectState {
   isLoading: boolean;
@@ -34,10 +35,18 @@ export const projectsSlice = createSlice({
     updateViewProject: (state, action: PayloadAction<ProjectInterface>) => {
       state.viewProject = action.payload;
     },
+    updateNewTicket: (state, action: PayloadAction<TicketInterface>) => {
+      state.viewProject?.tickets?.unshift(action.payload);
+    },
   },
 });
 
-export const { updateStart, updateSuccess, updateFailure, updateViewProject } =
-  projectsSlice.actions;
+export const {
+  updateStart,
+  updateSuccess,
+  updateFailure,
+  updateViewProject,
+  updateNewTicket,
+} = projectsSlice.actions;
 
 export default projectsSlice;
