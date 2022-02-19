@@ -4,8 +4,8 @@ import {
   updateFailure,
   updateStart,
   updateSuccess,
+  updateViewProject,
 } from "../store/projectsSlice";
-import ProjectInterface from "../types/ProjectInterface";
 import Api from "./Api";
 
 export const fetchAllProjects = async (dispatch: AppDispatch) => {
@@ -24,8 +24,8 @@ export const fetchAllProjects = async (dispatch: AppDispatch) => {
   }
 };
 
-export const fetchSingleProject = async (id: string) => {
+export const fetchSingleProject = async (id: string, dispatch: AppDispatch) => {
   const res = await Api.get(`/projects/${id}?_embed=tickets`);
 
-  return res.data;
+  dispatch(updateViewProject(res.data));
 };

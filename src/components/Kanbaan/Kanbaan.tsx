@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   DragDropContext,
   Draggable,
@@ -10,13 +10,7 @@ import TicketInterface from "../../types/TicketInterface";
 import KanbaanCard from "./KanbaanCard";
 import KanbaanColumn from "./KanbaanColumn";
 
-const Kanbaan = ({
-  project,
-  setProject,
-}: {
-  project: ProjectInterface;
-  setProject: Dispatch<SetStateAction<ProjectInterface | null>>;
-}) => {
+const Kanbaan = ({ project }: { project: ProjectInterface }) => {
   const initialColumns: {
     [key: string]: { title: string; items: TicketInterface[] | [] };
   } = {
@@ -91,6 +85,7 @@ const Kanbaan = ({
                   <KanbaanColumn
                     title={column.title}
                     length={column.items.length}
+                    isDraggingOver={snapshot.isDraggingOver}
                   >
                     {column.items.map((item, index) => (
                       <Draggable
@@ -104,7 +99,10 @@ const Kanbaan = ({
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
                           >
-                            <KanbaanCard ticket={item} />
+                            <KanbaanCard
+                              ticket={item}
+                              isDragging={snapshot.isDragging}
+                            />
                           </div>
                         )}
                       </Draggable>

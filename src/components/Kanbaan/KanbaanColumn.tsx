@@ -1,13 +1,19 @@
 import { PlusIcon } from "@heroicons/react/outline";
-import { FC, ReactChildren } from "react";
+import { FC } from "react";
 
-const KanbaanColumn: FC<{ title: string; length: number }> = ({
-  title,
-  length,
-  children,
-}) => {
+const KanbaanColumn: FC<{
+  title: string;
+  length: number;
+  isDraggingOver: boolean;
+}> = ({ title, length, children, isDraggingOver }) => {
   return (
-    <div className="w-full">
+    <div
+      className={
+        isDraggingOver
+          ? "w-full h-full p-4 bg-slate-300 dark:bg-slate-700"
+          : "w-full h-full p-4"
+      }
+    >
       <div className="flex justify-between items-center">
         <div className="uppercase text-lg font-bold text-slate-700 dark:text-slate-300 flex items-center">
           {title}

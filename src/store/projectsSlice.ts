@@ -5,12 +5,14 @@ interface ProjectState {
   isLoading: boolean;
   error: string;
   projects: ProjectInterface[] | null;
+  viewProject: ProjectInterface | null;
 }
 
 const initialState: ProjectState = {
   isLoading: false,
   error: "",
   projects: null,
+  viewProject: null,
 };
 
 export const projectsSlice = createSlice({
@@ -29,10 +31,13 @@ export const projectsSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
+    updateViewProject: (state, action: PayloadAction<ProjectInterface>) => {
+      state.viewProject = action.payload;
+    },
   },
 });
 
-export const { updateStart, updateSuccess, updateFailure } =
+export const { updateStart, updateSuccess, updateFailure, updateViewProject } =
   projectsSlice.actions;
 
 export default projectsSlice;
