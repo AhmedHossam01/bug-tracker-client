@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import {
   DragDropContext,
   Draggable,
@@ -7,6 +7,7 @@ import {
 } from "react-beautiful-dnd";
 import ProjectInterface from "../../types/ProjectInterface";
 import TicketInterface from "../../types/TicketInterface";
+import KanbaanCard from "./KanbaanCard";
 import KanbaanColumn from "./KanbaanColumn";
 
 const Kanbaan = ({
@@ -35,6 +36,10 @@ const Kanbaan = ({
         project?.tickets?.filter((ticket) => ticket.status === "done") || [],
     },
   };
+
+  useEffect(() => {
+    setColumns(initialColumns);
+  }, [project]);
 
   const [columns, setColumns] = useState(initialColumns);
 
@@ -76,10 +81,40 @@ const Kanbaan = ({
   };
 
   return (
-    <div style={{ display: "flex", justifyContent: "center", height: "100%" }}>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       <DragDropContext onDragEnd={onDragEnd}>
         {Object.entries(columns).map(([id, column]) => {
-          return <Droppable droppableId={id}></Droppable>;
+          return (
+            <Droppable droppableId={id} key={id}>
+              {(provided, snapshot) => (
+                <div {...provided.droppableProps} ref={provided.innerRef}>
+                  <KanbaanColumn
+                    title={column.title}
+                    length={column.items.length}
+                  >
+                    {column.items.map((item, index) => (
+                      <Draggable
+                        key={item.id}
+                        draggableId={item.id}
+                        index={index}
+                      >
+                        {(provided, snapshot) => (
+                          <div
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                          >
+                            <KanbaanCard ticket={item} />
+                          </div>
+                        )}
+                      </Draggable>
+                    ))}
+                  </KanbaanColumn>
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+          );
         })}
       </DragDropContext>
     </div>

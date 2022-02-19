@@ -14,9 +14,9 @@ const Kanbaan = ({ project }: { project: ProjectInterface }) => {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {todoTickets && <KanbaanColumn title="todo" tickets={todoTickets} />}
+      {/* {todoTickets && <KanbaanColumn title="todo" tickets={todoTickets} />}
       {doingTickets && <KanbaanColumn title="doing" tickets={doingTickets} />}
-      {doneTickets && <KanbaanColumn title="done" tickets={doneTickets} />}
+      {doneTickets && <KanbaanColumn title="done" tickets={doneTickets} />} */}
     </div>
   );
 };
