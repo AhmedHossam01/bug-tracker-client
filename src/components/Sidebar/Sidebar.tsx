@@ -132,13 +132,6 @@ const Sidebar = () => {
         <div className="mt-auto"></div>
 
         <SidebarHeading title="Account" />
-
-        <SidebarLink
-          to="settings"
-          myKey="settings"
-          name="Settings"
-          icon={<CogIcon className="w-6 h-6" />}
-        />
         <SidebarAction
           name={`Logout (${user?.email.substring(0, 8)}...)`}
           icon={<LogoutIcon className="w-6 h-6 text-red-500" />}

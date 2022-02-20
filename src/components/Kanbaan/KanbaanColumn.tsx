@@ -4,6 +4,7 @@ import { useAppDispatch } from "../../store/hooks";
 import { updateNewTicket } from "../../store/projectsSlice";
 import { v4 as uuidv4 } from "uuid";
 import "react-taggables-input/dist/tags.css";
+import { faker } from "@faker-js/faker";
 
 const KanbaanColumn: FC<{
   title: string;
@@ -32,6 +33,7 @@ const KanbaanColumn: FC<{
         name,
         // @ts-ignore
         status,
+        assignee: faker.image.avatar(),
       })
     );
 
