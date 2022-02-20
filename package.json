@@ -63,6 +63,7 @@
     ]
   },
   "devDependencies": {
+    "@faker-js/faker": "^6.0.0-alpha.6",
     "@testing-library/cypress": "^8.0.2",
     "@types/autoprefixer": "^10.2.0",
     "@types/cypress": "^1.1.3",

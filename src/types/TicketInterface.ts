@@ -9,4 +9,5 @@ export default interface TicketInterface {
   tags: string[];
   created_at: string;
   project?: ProjectInterface;
+  assignee: string;
 }

@@ -3,7 +3,7 @@ import TicketInterface from "../../types/TicketInterface";
 import calcTimeAgo from "../../utils/calcTimeAgo";
 
 const KanbaanCard = ({
-  ticket: { tags, name, description, created_at },
+  ticket: { tags, name, description, created_at, assignee },
   isDragging,
 }: {
   ticket: TicketInterface;
@@ -35,8 +35,8 @@ const KanbaanCard = ({
           </div>
 
           <img
-            className="w-5 h-5 rounded-full"
-            src="https://picsum.photos/200/200"
+            className="w-5 h-5 rounded-full bg-indigo-600"
+            src={assignee}
             alt="avatar"
           />
         </div>

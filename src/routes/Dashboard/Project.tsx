@@ -17,7 +17,6 @@ const Project = () => {
       const currentViewProject = projects?.find(
         (project) => project.id.toString() === id.toString()
       );
-      console.log(currentViewProject);
       if (currentViewProject) {
         dispatch(updateViewProject(currentViewProject));
       }
