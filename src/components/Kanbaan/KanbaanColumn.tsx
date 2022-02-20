@@ -3,7 +3,7 @@ import { FC, SyntheticEvent, useState } from "react";
 import { useAppDispatch } from "../../store/hooks";
 import { updateNewTicket } from "../../store/projectsSlice";
 import { v4 as uuidv4 } from "uuid";
-import "react-responsive-modal/styles.css";
+import "react-taggables-input/dist/tags.css";
 
 const KanbaanColumn: FC<{
   title: string;
