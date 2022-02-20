@@ -30,7 +30,7 @@ const SubLink = ({
           className={`w-2 h-2 rounded-full ml-3`}
           style={{ backgroundColor: color }}
         ></span>
-        <span className="ml-4 truncate">{name}</span>
+        <span className="ml-4 truncate capitalize">{name}</span>
       </NavLink>
     </li>
   );

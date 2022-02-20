@@ -9,7 +9,6 @@ const MyTickets = () => {
   return (
     <div className="customContainer">
       <DashboardTitle title="My Tickets" icon={<TicketIcon />} />
-
       <div className="flex flex-col gap-4 mt-8">
         {tickets &&
           tickets.map((ticket) => <DashboardTicketCard ticket={ticket} />)}

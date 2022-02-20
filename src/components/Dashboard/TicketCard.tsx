@@ -18,7 +18,7 @@ const DashboardTicketCard = ({
           className="rounded md p-1 text-white w-fit mt-2"
           style={{ backgroundColor: project?.color }}
         >
-          {project?.name}
+          {project?.name} ago
         </div>
       </Link>
     </div>

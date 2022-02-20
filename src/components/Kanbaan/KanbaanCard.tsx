@@ -31,7 +31,7 @@ const KanbaanCard = ({
         <div className="flex justify-between items-center mt-3">
           <div className="flex gap-2 text-sm text-slate-300 items-center">
             <CalendarIcon className="w-4 h-4 text-slate-500" />
-            {calcTimeAgo(created_at)}
+            {calcTimeAgo(created_at)} ago
           </div>
 
           <img
