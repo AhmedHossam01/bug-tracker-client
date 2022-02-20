@@ -37,6 +37,8 @@ const Sidebar = () => {
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
 
+    if (!name.length) return;
+
     const dateNow = new Date(Date.now() - 2000).toISOString();
 
     const id = uuidv4();
