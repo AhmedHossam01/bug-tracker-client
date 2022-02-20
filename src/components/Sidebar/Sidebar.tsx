@@ -26,6 +26,7 @@ const Sidebar = () => {
   const navigate = useNavigate();
 
   const [name, setName] = useState("");
+  const [open, setOpen] = useState(false);
 
   const handleLogout = () => {
     if (window.confirm("Are you sure you want to logout?")) {
@@ -56,6 +57,7 @@ const Sidebar = () => {
     navigate(`/dashboard/projects/${id}`);
 
     setName("");
+    setOpen(false);
   };
 
   return (
@@ -68,14 +70,14 @@ const Sidebar = () => {
       <ul className="flex flex-col w-full">
         <SidebarLink
           to="/dashboard"
-          key="dashboard"
+          myKey="dashboard"
           name="Dashboard"
           icon={<HomeIcon className="w-6 h-6" />}
         />
 
         <SidebarLink
           to="tickets"
-          key="tickets"
+          myKey="tickets"
           name="My Tickets"
           badge={tickets?.length.toString()}
           icon={<TicketIcon className="w-6 h-6" />}
@@ -86,7 +88,7 @@ const Sidebar = () => {
         <SidebarLink
           name="All Projects"
           to="projects"
-          key="projects"
+          myKey="projects"
           badge={projects?.length.toString()}
           icon={<ArchiveIcon className="w-6 h-6" />}
         />
@@ -95,32 +97,36 @@ const Sidebar = () => {
           {projects?.map((project) => (
             <SubLink
               key={project.id.toString()}
+              myKey={project.id.toString()}
               project={project}
               to={`projects/${project.id}`}
             />
           ))}
         </div>
 
-        <div className="flex flex-row items-center h-8 mb-2 px-4 rounded-lg text-gray-600 dark:text-gray-200">
-          <span className="w-2 h-2 rounded-full ml-3"></span>
-          <span className="ml-4 truncate">
-            <form onSubmit={handleSubmit}>
-              <input
-                onChange={(e) => setName(e.target.value)}
-                value={name}
-                type="text"
-                placeholder="Create a new project"
-                className="input input-bordered w-full max-w-xs input-sm input-accent"
-              />
-            </form>
-          </span>
-        </div>
+        {open && (
+          <div className="flex flex-row items-center h-8 mb-2 px-4 rounded-lg text-gray-600 dark:text-gray-200">
+            <span className="w-2 h-2 rounded-full ml-3"></span>
+            <span className="ml-4 truncate">
+              <form onSubmit={handleSubmit}>
+                <input
+                  onChange={(e) => setName(e.target.value)}
+                  value={name}
+                  type="text"
+                  placeholder="Create a new project"
+                  className="input input-bordered w-full max-w-xs input-sm input-accent"
+                />
+              </form>
+            </span>
+          </div>
+        )}
 
         <SidebarAction
           name="New Project"
           icon={
             <PlusCircleIcon className="w-6 h-6 text-green-600 dark:text-green-400" />
           }
+          onClick={() => setOpen(!open)}
         />
 
         <div className="mt-auto"></div>
@@ -129,7 +135,7 @@ const Sidebar = () => {
 
         <SidebarLink
           to="settings"
-          key="settings"
+          myKey="settings"
           name="Settings"
           icon={<CogIcon className="w-6 h-6" />}
         />

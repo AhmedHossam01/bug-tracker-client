@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { useAppDispatch } from "../../store/hooks";
 import { closeFromLink } from "../../store/layoutSlice";
 
-const SiedebarItem = ({ name, icon, badge, to, key }: IProps) => {
+const SiedebarItem = ({ name, icon, badge, to, myKey }: IProps) => {
   const dispatch = useAppDispatch();
 
   return (
@@ -12,7 +12,7 @@ const SiedebarItem = ({ name, icon, badge, to, key }: IProps) => {
         onClick={() => dispatch(closeFromLink())}
         to={to}
         end
-        key={key}
+        key={myKey}
         className={({ isActive }) =>
           `flex flex-row items-center h-12 px-4 rounded-lg text-gray-600 dark:text-gray-200 ${
             isActive
@@ -41,6 +41,7 @@ interface IProps {
   name: string;
   icon: ReactElement;
   badge?: string;
+  myKey: string;
 }
 
 export default SiedebarItem;

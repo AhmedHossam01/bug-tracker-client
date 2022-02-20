@@ -11,14 +11,14 @@ const DashboardTicketCard = ({
     <div className="bg-slate-700 py-3 px-4 rounded-md text-white">
       <div className="flex justify-between">
         <p>{name}</p>
-        <p>{calcTimeAgo(created_at)}</p>
+        <p>{calcTimeAgo(created_at)} ago</p>
       </div>
       <Link to={`/dashboard/projects/${project?.id}`}>
         <div
           className="rounded md p-1 text-white w-fit mt-2"
           style={{ backgroundColor: project?.color }}
         >
-          {project?.name} ago
+          {project?.name}
         </div>
       </Link>
     </div>

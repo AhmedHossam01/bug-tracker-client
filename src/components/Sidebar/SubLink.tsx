@@ -6,11 +6,11 @@ import ProjectInterface from "../../types/ProjectInterface";
 const SubLink = ({
   project: { color, name },
   to,
-  key,
+  myKey,
 }: {
   project: ProjectInterface;
   to: string;
-  key: string;
+  myKey: string;
 }) => {
   const dispatch = useAppDispatch();
 
@@ -19,7 +19,7 @@ const SubLink = ({
       <NavLink
         onClick={() => dispatch(closeFromLink())}
         to={to}
-        key={key}
+        key={myKey}
         className={({ isActive }) =>
           `flex flex-row items-center h-8 mb-2 px-4 rounded-lg text-gray-600 dark:text-gray-200 ${
             isActive && "dark:bg-slate-900 text-blue-500"

@@ -38,7 +38,7 @@ const Homepage = () => {
             )}
 
             {ticketsState?.tickets?.map((ticket) => (
-              <DashboardTicketCard ticket={ticket} />
+              <DashboardTicketCard ticket={ticket} key={ticket.id} />
             ))}
           </div>
         </div>
