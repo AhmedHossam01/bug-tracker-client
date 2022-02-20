@@ -8,8 +8,8 @@ const intervals = [
 ];
 
 const calcTimeAgo = (dateString: string) => {
-  const date = new Date(dateString);
-  const secondsAgo = Math.floor((Date.now() - date.getTime()) / 1000);
+  const date = Date.parse(dateString);
+  const secondsAgo = Math.floor((Date.now() - date) / 1000);
   const interval = intervals.find((el) => el.seconds < secondsAgo);
   // @ts-ignore
   const count = Math.floor(secondsAgo / interval.seconds);

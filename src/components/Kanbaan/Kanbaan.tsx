@@ -87,6 +87,7 @@ const Kanbaan = ({ project }: { project: ProjectInterface }) => {
                     length={column.items.length}
                     isDraggingOver={snapshot.isDraggingOver}
                     status={id}
+                    projectId={project.id}
                   >
                     {column.items.map((item, index) => (
                       <Draggable

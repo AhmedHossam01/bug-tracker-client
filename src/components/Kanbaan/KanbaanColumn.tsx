@@ -1,29 +1,42 @@
 import { PlusIcon } from "@heroicons/react/outline";
-import { FC } from "react";
+import { FC, SyntheticEvent, useState } from "react";
 import { useAppDispatch } from "../../store/hooks";
 import { updateNewTicket } from "../../store/projectsSlice";
+import { v4 as uuidv4 } from "uuid";
+import "react-responsive-modal/styles.css";
 
 const KanbaanColumn: FC<{
   title: string;
   length: number;
   isDraggingOver: boolean;
   status: string;
-}> = ({ title, length, children, isDraggingOver, status }) => {
+  projectId: string;
+}> = ({ title, length, children, isDraggingOver, status, projectId }) => {
   const dispatch = useAppDispatch();
 
-  const addNewTicket = () => {
+  const [open, setOpen] = useState(false);
+  const [name, setName] = useState("");
+
+  const onSubmit = (e: SyntheticEvent) => {
+    e.preventDefault();
+
+    const dateNow = new Date(Date.now() - 2000).toISOString();
+
     dispatch(
       updateNewTicket({
-        id: "54345",
-        project_id: "1",
+        id: uuidv4(),
+        project_id: projectId,
         tags: [],
-        description: "trtrt",
-        created_at: "1212",
-        name: "test",
+        description: name,
+        created_at: dateNow,
+        name,
         // @ts-ignore
         status,
       })
     );
+
+    setName("");
+    setOpen(false);
   };
 
   return (
@@ -42,12 +55,28 @@ const KanbaanColumn: FC<{
           </span>
         </div>
         <div
-          className="text-green-700 hover:bg-green-700 hover:text-white w-5 h-5 rounded-md flex items-center justify-center cursor-pointer transition-colors"
-          onClick={addNewTicket}
+          className="text-green-700 hover:bg-green-700 hover:text-white w-6 h-6 rounded-md flex items-center justify-center cursor-pointer transition-colors"
+          onClick={() => setOpen(true)}
         >
-          <PlusIcon />
+          <PlusIcon className="w-4 h-4" />
         </div>
       </div>
+      {open && (
+        <div className="mt-4">
+          <form onSubmit={onSubmit}>
+            <input
+              type="text"
+              required
+              placeholder="Type here"
+              className="input w-full max-w-xs"
+              onChange={(e) => setName(e.target.value)}
+            />
+            <button type="submit" className="btn btn-success mt-3 btn-sm">
+              Add
+            </button>
+          </form>
+        </div>
+      )}
       <div className="mt-6 flex flex-col gap-2">{children}</div>
     </div>
   );

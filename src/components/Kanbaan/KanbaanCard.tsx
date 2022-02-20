@@ -15,7 +15,7 @@ const KanbaanCard = ({
         isDragging ? "scale-95 rotate-6 transition-transform duration-300" : ""
       }
     >
-      <div className="rounded-md bg-slate-700 text-white dark:bg-slate-800 p-3">
+      <div className="rounded-md bg-slate-700 text-white dark:bg-slate-800 p-3 animate-[wiggle_0.2s_ease-in-out]">
         <div className="flex gap-2 flex-wrap">
           {tags.map((tag) => (
             <div className="shadow-lg w-fit rounded-xl px-3 text-xs font-semibold py-1 bg-indigo-300 text-indigo-900">
