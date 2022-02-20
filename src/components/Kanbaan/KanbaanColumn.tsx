@@ -44,7 +44,7 @@ const KanbaanColumn: FC<{
       className={
         isDraggingOver
           ? "w-full h-full p-4 bg-slate-300 dark:bg-slate-700"
-          : "w-full h-full p-4"
+          : "w-full h-full"
       }
     >
       <div className="flex justify-between items-center">
@@ -70,6 +70,7 @@ const KanbaanColumn: FC<{
               placeholder="Type here"
               className="input w-full max-w-xs"
               onChange={(e) => setName(e.target.value)}
+              value={name}
             />
             <button type="submit" className="btn btn-success mt-3 btn-sm">
               Add

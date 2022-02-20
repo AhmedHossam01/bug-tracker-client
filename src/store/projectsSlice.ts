@@ -38,6 +38,9 @@ export const projectsSlice = createSlice({
     updateNewTicket: (state, action: PayloadAction<TicketInterface>) => {
       state.viewProject?.tickets?.unshift(action.payload);
     },
+    createNewProject: (state, action: PayloadAction<ProjectInterface>) => {
+      state.projects?.push(action.payload);
+    },
   },
 });
 
@@ -47,6 +50,7 @@ export const {
   updateFailure,
   updateViewProject,
   updateNewTicket,
+  createNewProject,
 } = projectsSlice.actions;
 
 export default projectsSlice;

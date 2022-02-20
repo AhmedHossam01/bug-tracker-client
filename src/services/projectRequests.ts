@@ -1,18 +1,20 @@
 import axios from "axios";
 import { AppDispatch } from "../store";
 import {
+  createNewProject,
   updateFailure,
   updateStart,
   updateSuccess,
   updateViewProject,
 } from "../store/projectsSlice";
+import ProjectInterface from "../types/ProjectInterface";
 import Api from "./Api";
 
 export const fetchAllProjects = async (dispatch: AppDispatch) => {
   try {
     dispatch(updateStart());
 
-    const res = await Api.get("/projects");
+    const res = await Api.get("/projects?_embed=tickets");
 
     dispatch(updateSuccess(res.data));
   } catch (error) {
@@ -24,8 +26,9 @@ export const fetchAllProjects = async (dispatch: AppDispatch) => {
   }
 };
 
-export const fetchSingleProject = async (id: string, dispatch: AppDispatch) => {
-  const res = await Api.get(`/projects/${id}?_embed=tickets`);
-
-  dispatch(updateViewProject(res.data));
+export const createProject = async (
+  dispatch: AppDispatch,
+  project: ProjectInterface
+) => {
+  dispatch(createNewProject(project));
 };
