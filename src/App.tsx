@@ -10,6 +10,7 @@ import { useAppDispatch } from "./store/hooks";
 import AllProjects from "./routes/Dashboard/AllProjects";
 import Project from "./routes/Dashboard/Project";
 import MyTickets from "./routes/Dashboard/MyTickets";
+import Register from "./routes/Register";
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -24,6 +25,7 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Login />} />
+        <Route path="/register" element={<Register />} />
 
         <Route
           path="/dashboard"
