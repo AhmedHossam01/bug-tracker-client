@@ -53,36 +53,50 @@ const Login = () => {
           )}
 
           <div>
-            <Input
+            <label className="block text-gray-700" htmlFor={"email"}>
+              Email Address
+            </label>
+
+            <input
               {...register("email", {
                 required: "Please enter an email.",
                 validate: {
-                  emailExist: async (value) =>
-                    (await !validateEmail(value)) || "This email doesn't exist",
                   emailVlid: (value) =>
                     /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value) ||
-                    "Please enter a valid email",
+                    "Please use a valid email",
                 },
               })}
-              error={errors.email}
-              label="Email Address"
-              placeholder="Email"
               type="email"
               name="email"
+              id="email"
+              placeholder="john@gmail.com"
+              className={errors.email ? inputErrClassName : inputClassName}
             />
+
+            {errors.email && (
+              <p className="text-red-500 mt-1">{errors.email.message}</p>
+            )}
           </div>
 
           <div className="mt-6">
-            <Input
+            <label className="block text-gray-700" htmlFor={"email"}>
+              Password
+            </label>
+
+            <input
               {...register("password", {
                 required: "Please enter a password.",
               })}
-              error={errors.password}
-              name="password"
-              placeholder="test"
               type="password"
-              label="Password"
+              name="password"
+              id="password"
+              placeholder="Enter your password"
+              className={errors.password ? inputErrClassName : inputClassName}
             />
+
+            {errors.password && (
+              <p className="text-red-500 mt-1">{errors.password.message}</p>
+            )}
           </div>
 
           <button
@@ -107,7 +121,7 @@ const Login = () => {
         </p>
       </div>
 
-      <div className="hidden md:block md:w-1/2 xl:w-3/5 h-full">
+      <div className="hidden md:block md:w-1/2 xl:w-3/5 self-stretch">
         <img
           src="https://source.unsplash.com/random"
           alt="screenshot"
