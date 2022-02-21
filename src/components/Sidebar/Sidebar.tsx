@@ -2,7 +2,6 @@ import SidebarAction from "./SiedebarAction";
 import SidebarLink from "./SidebarLink";
 import {
   ArchiveIcon,
-  CogIcon,
   HomeIcon,
   LogoutIcon,
   PlusCircleIcon,
@@ -137,7 +136,15 @@ const Sidebar = () => {
           icon={<LogoutIcon className="w-6 h-6 text-red-500" />}
           onClick={handleLogout}
         />
-        <li className="py-2"></li>
+        <a
+          href="https://www.ahmedhossam.me/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hidden md:block bg-slate-300 dark:bg-black w-full rounded-md p-1 mt-4"
+        >
+          Made with ❤ by <b className="text-sky-500">Ahmed Hossam</b>
+        </a>
+        <li className="py-4"></li>
       </ul>
     </div>
   );

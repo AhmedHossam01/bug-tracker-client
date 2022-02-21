@@ -15,7 +15,7 @@ const Register = () => {
   const from = location.state?.from?.pathname || "/dashboard";
   const dispatch = useDispatch();
 
-  const { isLoading, error, user } = useAppSelector((state) => state.auth);
+  const { isLoading, user } = useAppSelector((state) => state.auth);
   const [isValidating, setIsValidating] = useState(false);
 
   const {
@@ -53,15 +53,6 @@ const Register = () => {
         </h1>
 
         <form className="mt-6 md:mt-12" onSubmit={handleSubmit(onSubmit)}>
-          {error && (
-            <div className="alert alert-error mb-4" role="alert">
-              <div className="flex-1">
-                <ExclamationCircleIcon className="w-6 h-6 mr-2" />
-                <label>{error}</label>
-              </div>
-            </div>
-          )}
-
           <div>
             <label className="block text-gray-700" htmlFor={"email"}>
               Email Address

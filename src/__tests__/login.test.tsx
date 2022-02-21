@@ -23,20 +23,23 @@ describe("login form", () => {
   it("should display error when submitted empty", async () => {
     render(<LoginRoute />);
 
-    expect(screen.getByLabelText(/email/i)).not.toHaveClass("border-red-500");
-    expect(screen.getByLabelText(/password/i)).not.toHaveClass(
-      "border-red-500"
-    );
+    expect(
+      screen.queryByText(/Please enter an email./i)
+    ).not.toBeInTheDocument();
+
+    expect(
+      screen.queryByText(/Please enter a password./i)
+    ).not.toBeInTheDocument();
 
     fireEvent.submit(screen.getByRole("button", { name: /sign in/i }));
 
-    expect(await screen.findByLabelText(/email/i)).toHaveClass(
-      "border-red-500"
-    );
+    expect(
+      await screen.findByText(/Please enter an email./i)
+    ).toBeInTheDocument();
 
-    expect(await screen.findByLabelText(/password/i)).toHaveClass(
-      "border-red-500"
-    );
+    expect(
+      await screen.findByText(/Please enter a password./i)
+    ).toBeInTheDocument();
   });
 
   it("should display alert on error response from server", async () => {
@@ -46,11 +49,11 @@ describe("login form", () => {
       screen.queryByText(/Incorrect email or password/i)
     ).not.toBeInTheDocument();
 
-    fireEvent.input(screen.getByLabelText(/email/i), {
-      target: { value: "test@test.com" },
+    fireEvent.input(screen.getByLabelText(/Email Address/i), {
+      target: { value: "test@gmail.com" },
     });
 
-    fireEvent.input(screen.getByLabelText(/password/i), {
+    fireEvent.input(screen.getByLabelText(/Password/i), {
       target: { value: "123456" },
     });
 

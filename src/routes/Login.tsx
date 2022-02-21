@@ -38,7 +38,7 @@ const Login = () => {
     <section className="flex">
       <div className="p-8 grow min-h-screen">
         <h1 className="text-xl md:text-4xl font-bold leading-tight md:mt-12 text-slate-700">
-          Sign in to your account
+          Login
         </h1>
 
         <form className="mt-6 md:mt-12" onSubmit={handleSubmit(onSubmit)}>
@@ -46,13 +46,13 @@ const Login = () => {
             <div className="alert alert-error mb-4" role="alert">
               <div className="flex-1">
                 <ExclamationCircleIcon className="w-6 h-6 mr-2" />
-                <label>{error}</label>
+                <p>{error}</p>
               </div>
             </div>
           )}
 
           <div>
-            <label className="block text-gray-700" htmlFor={"email"}>
+            <label className="block text-gray-700" htmlFor="email">
               Email Address
             </label>
             <input
@@ -77,7 +77,7 @@ const Login = () => {
           </div>
 
           <div className="mt-6">
-            <label className="block text-gray-700" htmlFor={"email"}>
+            <label className="block text-gray-700" htmlFor="password">
               Password
             </label>
 
