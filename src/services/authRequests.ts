@@ -45,3 +45,15 @@ export const findMeRequest = async (dispatch: AppDispatch) => {
     }
   }
 };
+
+export const validateEmail = async (email: string) => {
+  try {
+    const res = await Api.get(`/auth/check/${email}`);
+
+    return res.data.result;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return error.response?.data.error.message || "An error occured";
+    }
+  }
+};

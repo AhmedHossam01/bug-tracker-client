@@ -1,11 +1,13 @@
+import Input from "../components/Form/Input";
 import { useDispatch } from "react-redux";
 import { Navigate, useLocation } from "react-router-dom";
-import { loginRequest } from "../services/authRequests";
+import { loginRequest, validateEmail } from "../services/authRequests";
 import { useAppSelector } from "../store/hooks";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { ExclamationCircleIcon } from "@heroicons/react/outline";
 import Spinner from "../components/Common/Spinner";
 import LoginFormInterface from "../types/LoginFormInterface";
+import { useState } from "react";
 
 const Login = () => {
   const location = useLocation();
@@ -19,146 +21,98 @@ const Login = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginFormInterface>();
+  } = useForm<LoginFormInterface>({
+    mode: "onBlur",
+  });
   const onSubmit: SubmitHandler<LoginFormInterface> = ({ email, password }) => {
     loginRequest({ email, password }, dispatch);
   };
 
+  const inputClassName =
+    "w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border-2 focus:border-blue-500 focus:bg-white focus:outline-none";
+  const inputErrClassName =
+    "w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border-2 focus:border-blue-500 focus:bg-white focus:outline-none border-red-500 focus:border-red-500";
+
   return user ? (
     <Navigate to={from} replace />
   ) : (
-    <section>
-      <div className="flex min-h-screen overflow-hidden">
-        <div className="flex flex-col justify-center flex-1 px-4 py-12 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
-          <div className="w-full max-w-xl mx-auto lg:w-96">
-            <div>
-              <a href="/" className="text-blue-600 text-medium">
-                Bug Tracker
-              </a>
-              <h2 className="mt-6 text-3xl font-extrabold text-neutral-600">
-                Sign in.
-              </h2>
-            </div>
+    <section className="flex min-h-screen">
+      <div className="p-8 grow">
+        <h1 className="text-xl md:text-4xl font-bold leading-tight md:mt-12 text-slate-700">
+          Sign in to your account
+        </h1>
 
-            {error && (
-              <div className="alert alert-error mt-8" role="alert">
-                <div className="flex-1">
-                  <ExclamationCircleIcon className="w-6 h-6 mr-2" />
-                  <label>{error}</label>
-                </div>
-              </div>
-            )}
-
-            <div className="mt-8">
-              <div className="mt-6">
-                <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
-                  <div>
-                    <label
-                      htmlFor="email"
-                      className={`block text-sm font-medium text-neutral-600 ${
-                        errors.email && "text-red-600"
-                      }`}
-                    >
-                      Email
-                    </label>
-                    <div className="mt-1">
-                      <input
-                        {...register("email", { required: true })}
-                        id="email"
-                        name="email"
-                        type="email"
-                        autoComplete="email"
-                        placeholder="Your Email address or Username"
-                        className={`${
-                          errors.email &&
-                          "border-red-500 border-1 focus:border-red-500 focus:ring-red-500 border-1 placeholder:text-red-300 animate-pulse"
-                        } block w-full px-5 py-3 text-base placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg text-neutral-600 bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300`}
-                      />
-                    </div>
-                  </div>
-                  <div className="space-y-1">
-                    <label
-                      htmlFor="password"
-                      className={`block text-sm font-medium text-neutral-600 ${
-                        errors.password && "text-red-600"
-                      }`}
-                    >
-                      Password
-                    </label>
-                    <div className="mt-1">
-                      <input
-                        {...register("password", { required: true })}
-                        id="password"
-                        name="password"
-                        type="password"
-                        autoComplete="current-password"
-                        placeholder="Your Password"
-                        className={`${
-                          errors.password &&
-                          "border-red-500 border-1 focus:border-red-500 focus:ring-red-500 border-1 placeholder:text-red-300 animate-pulse"
-                        } block w-full px-5 py-3 text-base placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg text-neutral-600 bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300`}
-                      />
-                    </div>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center">
-                      <input
-                        id="remember-me"
-                        name="remember-me"
-                        type="checkbox"
-                        className="w-4 h-4 text-blue-600 border-gray-200 rounded focus:ring-blue-50"
-                      />
-                      <label
-                        htmlFor="remember-me"
-                        className="block ml-2 text-sm text-neutral-600"
-                      >
-                        Remember me
-                      </label>
-                    </div>
-                    <div className="text-sm">
-                      <a
-                        href="/"
-                        className="font-medium text-blue-600 hover:text-blue-500"
-                      >
-                        Forgot your password?
-                      </a>
-                    </div>
-                  </div>
-                  <div>
-                    <button
-                      disabled={isLoading}
-                      className="disabled:bg-gray-300 flex items-center justify-center w-full px-10 py-4 text-base font-medium text-center text-white transition duration-500 ease-in-out transform bg-blue-600 rounded-xl hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                    >
-                      {isLoading ? <Spinner /> : "Sign in"}
-                    </button>
-                  </div>
-                </form>
-                <div className="relative my-4">
-                  <div className="absolute inset-0 flex items-center">
-                    <div className="w-full border-t border-gray-300" />
-                  </div>
-                  <div className="relative flex justify-center text-sm">
-                    <span className="px-2 bg-white text-neutral-600">Or</span>
-                  </div>
-                </div>
-                <div>
-                  <button className="w-full items-center block px-10 py-3.5 text-base font-medium text-center text-blue-600 transition duration-500 ease-in-out transform border-2 border-white shadow-xl rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
-                    <div className="flex items-center justify-center">
-                      Create an account
-                    </div>
-                  </button>
-                </div>
+        <form className="mt-6 md:mt-12" onSubmit={handleSubmit(onSubmit)}>
+          {error && (
+            <div className="alert alert-error mb-4" role="alert">
+              <div className="flex-1">
+                <ExclamationCircleIcon className="w-6 h-6 mr-2" />
+                <label>{error}</label>
               </div>
             </div>
+          )}
+
+          <div>
+            <Input
+              {...register("email", {
+                required: "Please enter an email.",
+                validate: {
+                  emailExist: async (value) =>
+                    (await !validateEmail(value)) || "This email doesn't exist",
+                  emailVlid: (value) =>
+                    /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value) ||
+                    "Please enter a valid email",
+                },
+              })}
+              error={errors.email}
+              label="Email Address"
+              placeholder="Email"
+              type="email"
+              name="email"
+            />
           </div>
-        </div>
-        <div className="relative flex-1 hidden w-0 overflow-hidden lg:block">
-          <img
-            className="absolute inset-0 object-cover w-full h-full"
-            src="https://d33wubrfki0l68.cloudfront.net/1a058aec6e3d81efe3ac4ca6366b40574876f6bc/32bc1/images/placeholders/rectanglewide.svg"
-            alt=""
-          />
-        </div>
+
+          <div className="mt-6">
+            <Input
+              {...register("password", {
+                required: "Please enter a password.",
+              })}
+              error={errors.password}
+              name="password"
+              placeholder="test"
+              type="password"
+              label="Password"
+            />
+          </div>
+
+          <button
+            disabled={isLoading}
+            type="submit"
+            className="flex items-center justify-center w-full bg-indigo-500 hover:bg-indigo-400 focus:bg-indigo-400 text-white font-semibold rounded-lg px-4 py-3 mt-6 disabled:bg-indigo-100"
+          >
+            {isLoading ? <Spinner /> : "Sign in"}
+          </button>
+        </form>
+
+        <hr className="my-6 border-gray-300 w-full" />
+
+        <p className="text-center">
+          Need an account?{" "}
+          <a
+            href="/"
+            className="text-blue-500 hover:text-blue-700 font-semibold"
+          >
+            Create an account
+          </a>
+        </p>
+      </div>
+
+      <div className="hidden md:block md:w-1/2 xl:w-3/5 h-full">
+        <img
+          src="https://source.unsplash.com/random"
+          alt="screenshot"
+          className="w-full h-full object-cover"
+        />
       </div>
     </section>
   );
