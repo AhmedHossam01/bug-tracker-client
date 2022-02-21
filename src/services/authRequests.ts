@@ -26,6 +26,28 @@ export const loginRequest = async (
   }
 };
 
+export const signupRequest = async (
+  formData: LoginFormInterface,
+  dispatch: AppDispatch
+) => {
+  try {
+    dispatch(updateStart());
+
+    const res = await Api.post("/auth/register", formData);
+
+    const { access_token, user } = res.data;
+    localStorage.setItem("token", access_token);
+
+    dispatch(updateSuccess(user));
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      dispatch(
+        updateFailure(error.response?.data.message || "An unkown error occured")
+      );
+    }
+  }
+};
+
 export const findMeRequest = async (dispatch: AppDispatch) => {
   try {
     dispatch(updateStart());

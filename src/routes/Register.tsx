@@ -1,7 +1,6 @@
-import Input from "../components/Form/Input";
 import { useDispatch } from "react-redux";
 import { Navigate, useLocation } from "react-router-dom";
-import { loginRequest, validateEmail } from "../services/authRequests";
+import { signupRequest, validateEmail } from "../services/authRequests";
 import { useAppSelector } from "../store/hooks";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { ExclamationCircleIcon } from "@heroicons/react/outline";
@@ -28,7 +27,7 @@ const Register = () => {
     mode: "onBlur",
   });
   const onSubmit: SubmitHandler<LoginFormInterface> = ({ email, password }) => {
-    loginRequest({ email, password }, dispatch);
+    signupRequest({ email, password }, dispatch);
   };
 
   const inputClassName =
