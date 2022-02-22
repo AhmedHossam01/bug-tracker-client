@@ -5,12 +5,14 @@ import {
   Droppable,
   DropResult,
 } from "react-beautiful-dnd";
-import ProjectInterface from "../../types/ProjectInterface";
+import { useAppSelector } from "../../store/hooks";
 import TicketInterface from "../../types/TicketInterface";
 import KanbaanCard from "./KanbaanCard";
 import KanbaanColumn from "./KanbaanColumn";
 
-const Kanbaan = ({ project }: { project: ProjectInterface }) => {
+const Kanbaan = () => {
+  const project = useAppSelector((state) => state.projects.viewProject);
+
   const initialColumns: {
     [key: string]: { title: string; items: TicketInterface[] | [] };
   } = {
@@ -31,12 +33,13 @@ const Kanbaan = ({ project }: { project: ProjectInterface }) => {
     },
   };
 
+  const [columns, setColumns] = useState(initialColumns);
+
   useEffect(() => {
     setColumns(initialColumns);
+
     // eslint-disable-next-line
   }, [project]);
-
-  const [columns, setColumns] = useState(initialColumns);
 
   const onDragEnd = (result: DropResult) => {
     if (!result.destination) return;
@@ -88,7 +91,9 @@ const Kanbaan = ({ project }: { project: ProjectInterface }) => {
                     length={column.items.length}
                     isDraggingOver={snapshot.isDraggingOver}
                     status={id}
-                    projectId={project.id}
+                    projectId={project?.id || ""}
+                    setColumns={setColumns}
+                    columns={columns}
                   >
                     {column.items.map((item, index) => (
                       <Draggable

@@ -33,7 +33,7 @@ const Project = () => {
           />
 
           <div className="mt-8">
-            <Kanbaan project={project} />
+            <Kanbaan />
           </div>
         </>
       )}

@@ -1,10 +1,9 @@
 import { PlusIcon } from "@heroicons/react/outline";
-import { FC, SyntheticEvent, useState } from "react";
-import { useAppDispatch } from "../../store/hooks";
-import { updateNewTicket } from "../../store/projectsSlice";
+import { Dispatch, FC, SetStateAction, SyntheticEvent, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import "react-taggables-input/dist/tags.css";
 import { faker } from "@faker-js/faker";
+import TicketInterface from "../../types/TicketInterface";
 
 const KanbaanColumn: FC<{
   title: string;
@@ -12,9 +11,22 @@ const KanbaanColumn: FC<{
   isDraggingOver: boolean;
   status: string;
   projectId: string;
-}> = ({ title, length, children, isDraggingOver, status, projectId }) => {
-  const dispatch = useAppDispatch();
-
+  columns: { [key: string]: { title: string; items: [] | TicketInterface[] } };
+  setColumns: Dispatch<
+    SetStateAction<{
+      [key: string]: { title: string; items: TicketInterface[] | [] };
+    }>
+  >;
+}> = ({
+  title,
+  length,
+  children,
+  isDraggingOver,
+  status,
+  columns,
+  projectId,
+  setColumns,
+}) => {
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
 
@@ -23,19 +35,20 @@ const KanbaanColumn: FC<{
 
     const dateNow = new Date(Date.now() - 2000).toISOString();
 
-    dispatch(
-      updateNewTicket({
-        id: uuidv4(),
-        project_id: projectId,
-        tags: [],
-        description: name,
-        created_at: dateNow,
-        name,
-        // @ts-ignore
-        status,
-        assignee: faker.image.avatar(),
-      })
-    );
+    const newColumns = JSON.parse(JSON.stringify(columns));
+    newColumns[status].items.unshift({
+      id: uuidv4(),
+      project_id: projectId,
+      tags: [],
+      description: name,
+      created_at: dateNow,
+      name,
+      // @ts-ignore
+      status,
+      assignee: faker.image.avatar(),
+    });
+
+    setColumns(newColumns);
 
     setName("");
     setOpen(false);
