@@ -106,7 +106,7 @@ const Login = () => {
           </button>
 
           {isLoading && (
-            <div className="alert alert-info mt-4">
+            <div className="alert alert-warning mt-4 text-yellow-600">
               Might take longer than expected if the server is still starting
               up...
             </div>
@@ -124,6 +124,16 @@ const Login = () => {
             Create an account
           </Link>
         </p>
+
+        <div className="bg-blue-100 px-4 py-2 rounded-lg mt-3 text-blue-600">
+          <p className="text-blue-400 text-sm">Or use these credentials 🙃</p>
+          <p className="mt-1">
+            📧 <b>demo@gmail.com</b>
+          </p>
+          <p>
+            🔑 <b>123456</b>
+          </p>
+        </div>
       </div>
 
       <div className="overflow-hidden hidden md:block md:w-1/2 xl:w-3/5 self-stretch">
