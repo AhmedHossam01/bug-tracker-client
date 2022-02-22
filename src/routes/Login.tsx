@@ -104,6 +104,13 @@ const Login = () => {
           >
             {isLoading ? <Spinner /> : "Sign in"}
           </button>
+
+          {isLoading && (
+            <div className="alert alert-info mt-4">
+              Might take longer than expected if the server is still starting
+              up...
+            </div>
+          )}
         </form>
 
         <hr className="my-6 border-gray-300 w-full" />
@@ -119,11 +126,11 @@ const Login = () => {
         </p>
       </div>
 
-      <div className="hidden md:block md:w-1/2 xl:w-3/5 self-stretch">
+      <div className="overflow-hidden hidden md:block md:w-1/2 xl:w-3/5 self-stretch">
         <img
           src="./screenshot.png"
           alt="screenshot"
-          className="w-full h-full object-cover object-right bg-indigo-100"
+          className="skew-y-6 scale-y-125 w-full h-full object-cover object-right bg-indigo-100"
         />
       </div>
     </section>

@@ -3,7 +3,6 @@ import { Navigate, useLocation } from "react-router-dom";
 import { signupRequest, validateEmail } from "../services/authRequests";
 import { useAppSelector } from "../store/hooks";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { ExclamationCircleIcon } from "@heroicons/react/outline";
 import Spinner from "../components/Common/Spinner";
 import LoginFormInterface from "../types/LoginFormInterface";
 import { useState } from "react";
@@ -39,11 +38,11 @@ const Register = () => {
     <Navigate to={from} replace />
   ) : (
     <section className="flex">
-      <div className="hidden md:block md:w-1/3 xl:w-3/5 self-stretch">
+      <div className="hidden md:block md:w-1/3 xl:w-3/5 self-stretch overflow-hidden">
         <img
           src="./screenshot.png"
           alt="screenshot"
-          className="w-full h-full object-cover object-right bg-indigo-100"
+          className="skew-y-6 scale-y-125 w-full h-full object-cover object-right bg-indigo-100"
         />
       </div>
 
@@ -94,7 +93,7 @@ const Register = () => {
 
           <div className="mt-6">
             <label className="block text-gray-700" htmlFor={"email"}>
-              Password
+              Password (Encrypted 👌)
             </label>
 
             <input
@@ -124,6 +123,13 @@ const Register = () => {
           >
             {isLoading ? <Spinner /> : "Register"}
           </button>
+
+          {isLoading && (
+            <div className="alert alert-info mt-4">
+              Might take longer than expected if the server is still starting
+              up...
+            </div>
+          )}
         </form>
 
         <hr className="my-6 border-gray-300 w-full" />
