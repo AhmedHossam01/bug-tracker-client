@@ -5,13 +5,13 @@ import {
   updateStart,
   updateSuccess,
 } from "../store/ticketsSlice";
-import Api from "./api";
+import api from "./api";
 
 export const fetchAllTickets = async (dispatch: AppDispatch) => {
   try {
     dispatch(updateStart());
 
-    const res = await Api.get("/tickets?_expand=project");
+    const res = await api.get("/tickets?_expand=project");
 
     dispatch(updateSuccess(res.data));
   } catch (error) {

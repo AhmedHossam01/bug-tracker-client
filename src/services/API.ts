@@ -1,11 +1,11 @@
 import axios from "axios";
 
-const Api = axios.create({
+const api = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
   responseType: "json",
 });
 
-Api.interceptors.request.use(function (config) {
+api.interceptors.request.use(function (config) {
   const token = localStorage.getItem("token");
   if (token) {
     // @ts-ignore
@@ -14,4 +14,4 @@ Api.interceptors.request.use(function (config) {
   return config;
 });
 
-export default Api;
+export default api;

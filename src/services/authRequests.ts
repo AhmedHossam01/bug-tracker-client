@@ -2,7 +2,7 @@ import axios from "axios";
 import { AppDispatch } from "../store";
 import { updateFailure, updateStart, updateSuccess } from "../store/authSlice";
 import LoginFormInterface from "../types/LoginFormInterface";
-import Api from "./api";
+import api from "./api";
 
 export const loginRequest = async (
   formData: LoginFormInterface,
@@ -11,7 +11,7 @@ export const loginRequest = async (
   try {
     dispatch(updateStart());
 
-    const res = await Api.post("/auth/login", formData);
+    const res = await api.post("/auth/login", formData);
 
     const { access_token, user } = res.data;
     localStorage.setItem("token", access_token);
@@ -33,7 +33,7 @@ export const signupRequest = async (
   try {
     dispatch(updateStart());
 
-    const res = await Api.post("/auth/register", formData);
+    const res = await api.post("/auth/register", formData);
 
     const { access_token, user } = res.data;
     localStorage.setItem("token", access_token);
@@ -52,7 +52,7 @@ export const findMeRequest = async (dispatch: AppDispatch) => {
   try {
     dispatch(updateStart());
 
-    const res = await Api.get("/auth/me");
+    const res = await api.get("/auth/me");
 
     const user = res.data;
 
@@ -70,7 +70,7 @@ export const findMeRequest = async (dispatch: AppDispatch) => {
 
 export const validateEmail = async (email: string) => {
   try {
-    const res = await Api.get(`/auth/check/${email}`);
+    const res = await api.get(`/auth/check/${email}`);
 
     return res.data.result;
   } catch (error) {

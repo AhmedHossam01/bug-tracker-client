@@ -8,13 +8,13 @@ import {
   updateViewProject,
 } from "../store/projectsSlice";
 import ProjectInterface from "../types/ProjectInterface";
-import Api from "./api";
+import api from "./api";
 
 export const fetchAllProjects = async (dispatch: AppDispatch) => {
   try {
     dispatch(updateStart());
 
-    const res = await Api.get("/projects?_embed=tickets");
+    const res = await api.get("/projects?_embed=tickets");
 
     dispatch(updateSuccess(res.data));
   } catch (error) {
