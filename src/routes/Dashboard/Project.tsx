@@ -1,4 +1,4 @@
-import { ArchiveIcon, TrashIcon } from "@heroicons/react/outline";
+import { ArchiveIcon } from "@heroicons/react/outline";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import DashboardTitle from "../../components/Dashboard/ItemsTitle";

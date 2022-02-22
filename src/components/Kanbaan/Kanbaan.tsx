@@ -33,6 +33,7 @@ const Kanbaan = ({ project }: { project: ProjectInterface }) => {
 
   useEffect(() => {
     setColumns(initialColumns);
+    // eslint-disable-next-line
   }, [project]);
 
   const [columns, setColumns] = useState(initialColumns);

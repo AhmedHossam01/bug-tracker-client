@@ -5,7 +5,6 @@ import {
   updateFailure,
   updateStart,
   updateSuccess,
-  updateViewProject,
 } from "../store/projectsSlice";
 import ProjectInterface from "../types/ProjectInterface";
 import api from "./api";

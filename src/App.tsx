@@ -1,5 +1,5 @@
 import Layout from "./components/Layout/Layout";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./routes/Login";
 import Homepage from "./routes/Dashboard/Homepage";
 import NotFound from "./routes/Dashboard/NotFound";

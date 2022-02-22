@@ -4,9 +4,7 @@ import DashboardProjectCard from "../../components/Dashboard/ProjectCard";
 import { useAppSelector } from "../../store/hooks";
 
 const AllProjects = () => {
-  const { projects, isLoading, error } = useAppSelector(
-    (state) => state.projects
-  );
+  const { projects, isLoading } = useAppSelector((state) => state.projects);
 
   return (
     <div className="customContainer">
