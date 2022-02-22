@@ -2,7 +2,7 @@ import axios from "axios";
 import { AppDispatch } from "../store";
 import { updateFailure, updateStart, updateSuccess } from "../store/authSlice";
 import LoginFormInterface from "../types/LoginFormInterface";
-import Api from "./Api";
+import Api from "./api";
 
 export const loginRequest = async (
   formData: LoginFormInterface,

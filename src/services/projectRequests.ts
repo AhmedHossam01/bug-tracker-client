@@ -8,7 +8,7 @@ import {
   updateViewProject,
 } from "../store/projectsSlice";
 import ProjectInterface from "../types/ProjectInterface";
-import Api from "./Api";
+import Api from "./api";
 
 export const fetchAllProjects = async (dispatch: AppDispatch) => {
   try {

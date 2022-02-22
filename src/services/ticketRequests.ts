@@ -5,7 +5,7 @@ import {
   updateStart,
   updateSuccess,
 } from "../store/ticketsSlice";
-import Api from "./Api";
+import Api from "./api";
 
 export const fetchAllTickets = async (dispatch: AppDispatch) => {
   try {
