@@ -4,6 +4,10 @@
 
 ![screenshot](./screenshot.png)
 
+## Live Demo
+
+[https://bug-tracker-01.netlify.app/](https://bug-tracker-01.netlify.app/)
+
 ## Built With
 
 - React
@@ -14,10 +18,6 @@
 - Tailwind CSS
 - Daisy UI
 - Typescript
-
-## Live Demo
-
-[https://bug-tracker-01.netlify.app/](https://bug-tracker-01.netlify.app/)
 
 ## Authors
 
