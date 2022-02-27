@@ -30,9 +30,9 @@ const Register = () => {
   };
 
   const inputClassName =
-    "mb-1 w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border-2 focus:border-blue-500 focus:bg-white focus:outline-none";
+    "mb-1 w-full px-4 py-3 rounded-lg bg-gray-200 disabled:bg-gray-200 mt-2 border-2 focus:border-blue-500 focus:bg-white focus:outline-none";
   const inputErrClassName =
-    "mb-1 w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border-2 focus:border-blue-500 focus:bg-white focus:outline-none border-red-500 focus:border-red-500";
+    "mb-1 w-full px-4 py-3 rounded-lg bg-gray-200 disabled:bg-gray-200 mt-2 border-2 focus:border-blue-500 focus:bg-white focus:outline-none border-red-500 focus:border-red-500";
 
   return user ? (
     <Navigate to={from} replace />

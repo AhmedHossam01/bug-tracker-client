@@ -28,9 +28,9 @@ const Login = () => {
   };
 
   const inputClassName =
-    "w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border-2 focus:border-blue-500 focus:bg-white focus:outline-none";
+    "w-full px-4 py-3 rounded-lg bg-gray-200 disabled:bg-gray-200 mt-2 border-2 focus:border-blue-500 focus:bg-white focus:outline-none";
   const inputErrClassName =
-    "w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border-2 focus:border-blue-500 focus:bg-white focus:outline-none border-red-500 focus:border-red-500";
+    "w-full px-4 py-3 rounded-lg bg-gray-200 disabled:bg-gray-200 mt-2 border-2 focus:border-blue-500 focus:bg-white focus:outline-none border-red-500 focus:border-red-500";
 
   return user ? (
     <Navigate to={from} replace />
