@@ -11,15 +11,18 @@ import AllProjects from "./routes/Dashboard/AllProjects";
 import Project from "./routes/Dashboard/Project";
 import MyTickets from "./routes/Dashboard/MyTickets";
 import Register from "./routes/Register";
+import { useJwt } from "react-jwt";
 
 const App = () => {
+  const token = localStorage.getItem("token") || "";
+  const { isExpired } = useJwt(token);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (localStorage.getItem("token")) {
+    if (token && !isExpired) {
       findMeRequest(dispatch);
     }
-  }, [dispatch]);
+  }, [dispatch, token, isExpired]);
 
   return (
     <BrowserRouter>
